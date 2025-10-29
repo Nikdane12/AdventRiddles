@@ -1,4 +1,4 @@
-export const openModal = (header, text, confirmAct, cancelAct, close_but) => {
+const openModal = (header, text, confirmAct, cancelAct, close_but) => {
     const modalBACK = document.createElement("div");
     modalBACK.classList.add("modalBACK")
 

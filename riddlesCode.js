@@ -1,4 +1,4 @@
-import {openModal} from './utils.js'
+// import {openModal} from './utils.js'
 
 const riddleLib = [
   { title: "Bath Riddle",
@@ -87,7 +87,7 @@ const riddleLib = [
 ];
 
 
-export const openRiddle = (num) => {
+const openRiddle = (num) => {
     const header = document.createElement('div');
     header.innerText = riddleLib[num].title;
 

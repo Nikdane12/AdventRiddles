@@ -1,4 +1,4 @@
-import {openRiddle} from './riddlesCode.js'
+// import {openRiddle} from './riddlesCode.js'
 
 let calender
 let daysarray
