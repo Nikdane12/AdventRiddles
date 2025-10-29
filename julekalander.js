@@ -151,63 +151,13 @@ const actuallyopeningday = (day) => {
     saveLocalStorage()
 }
 
-
-
 const clearAdvents = () => {
     localStorage.removeItem('daysarray')
     window.location.reload()
 }
 
-// let calender
-// let days = []
-// let daysOpened = []
-// let currentdate = new Date()
+// window.addEventListener('DOMContentLoaded', startup);
 
-// const startup = () => {
-//     calender = document.getElementById('calender')
-//     daysOpened = JSON.parse(localStorage.getItem('daysOpened')) ?? []
-//     for (var i = 1; i < 25; ++i) {
-//         days.push(i)
-//         const daycont = document.createElement('div')
-//         daycont.classList.add('daycont')
-//         daycont.innerHTML = `<div class="day" onclick="openDay(${i})">${i}</div>`
-//         // const dayimage = document.createElement('div')
-//         // dayimage.classList.add('dayimage')
-//         // daycont.appendChild(dayimage)
-//         calender.appendChild(daycont)
-//     }
-//     renderDays()
-//     console.log(currentdate.getDate())
-// }
-
-// const renderDays = () => {
-//     classday = document.getElementsByClassName('day')
-//     for (var x of daysOpened) {
-//         classday[x.day].classList.add(x.direction)
-//     }
-// }
-
-// const getRandomDirection = () => {
-//     let directions = ['up', 'down', 'left', 'right']
-//     return directions[Math.floor(Math.random()*directions.length)]
-// }
-
-
-// // let garbage = [{id, direction}]
-
-// const openDay = (x) => {
-//     if (x > currentdate.getDate()) {
-//         alert('Can not open')
-//         console.log('cantopen')
-//     }
-//     else {
-//         var newx = x - 1
-//         var slkdns = getRandomDirection()
-//         daysOpened.push({day:newx, direction:slkdns})
-//         localStorage.setItem('daysOpened', JSON.stringify(daysOpened))
-//         classday[newx].classList.add(slkdns)
-//     }
-// }
-
-
-
+window.startup = startup;
+window.clearAdvents = clearAdvents;
+window.unlock = unlock;
