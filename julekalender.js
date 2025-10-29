@@ -35,7 +35,7 @@ const startup = () => {
         if (!day.openstatus) { display = 'hide' }
         daycont.innerHTML = `
         <div class="daybackground ${display}"></div>
-        <img class="treat ${takeTreat} ${display}" src="/HTMLprojects/Julekalander/${day.treat}.png" onclick="eatTreat(${day.day})"/>
+        <img class="treat ${takeTreat} ${display}" src="./${day.treat}.png" onclick="eatTreat(${day.day})"/>
         <div class="day ${myanim}" onclick="openDoor(${day.day})">${day.day}</div>`
         calender.appendChild(daycont)
     }

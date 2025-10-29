@@ -86,21 +86,27 @@ const riddleLib = [
     answer: "Because it has Greece at the bottom.", },
 ];
 
-
 const openRiddle = (num) => {
+    if (num > riddleLib.length){
+        let offset = num - riddleLib.length;
+        num = offset;
+    }
+
     const header = document.createElement('div');
     header.innerText = riddleLib[num].title;
 
-    const body = document.createElement('div');
+    const riddleBody = document.createElement('div');
+    riddleBody.classList.add("riddlebody");
     
     const riddleText = document.createElement('div');
     riddleText.innerText = riddleLib[num].riddle;
     const answerText = document.createElement('div');
     answerText.innerText = riddleLib[num].answer;
+    answerText.classList.add("spoiler");
     
-    body.append(riddleText);
-    body.append(answerText);
+    riddleBody.append(riddleText);
+    riddleBody.append(answerText);
 
     
-    openModal(header, body, null, null, true)
+    openModal(header, riddleBody, null, null, true)
 }

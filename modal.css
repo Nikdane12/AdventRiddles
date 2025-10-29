@@ -51,6 +51,8 @@
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
+    color: black;
+    font-size: 12px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -110,4 +112,34 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
+}
+
+.modal>.title{
+    font-size: 35px;
+}
+
+.riddlebody{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.spoiler {
+    width:fit-content;
+    margin: auto;
+    background: rgb(50, 50, 50);
+    color: transparent;
+    border-radius: .2em;
+    padding: 0 .2em;
+    transition: color .15s ease, background .15s ease;
+}
+
+.spoiler:hover,
+.spoiler:focus-visible {
+    color: inherit;
+    background: transparent;
+    filter: none;
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
 }
