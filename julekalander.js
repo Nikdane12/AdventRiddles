@@ -153,7 +153,7 @@ const actuallyopeningday = (day) => {
 
 
 
-const clear2 = () => {
+const clearAdvents = () => {
     localStorage.removeItem('daysarray')
     window.location.reload()
 }
