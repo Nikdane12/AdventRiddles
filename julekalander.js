@@ -8,7 +8,6 @@ let lockbutton
 let unlockstatus
 let currentdate = new Date()
 
-
 const startup = () => {
     lockbutton = document.getElementById('unlock')
     unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
@@ -40,8 +39,6 @@ const startup = () => {
         <div class="day ${myanim}" onclick="openDoor(${day.day})">${day.day}</div>`
         calender.appendChild(daycont)
     }
-
-
 }
 
 const createDays = () => {
@@ -160,3 +157,5 @@ const clearAdvents = () => {
 window.startup = startup;
 window.clearAdvents = clearAdvents;
 window.unlock = unlock;
+window.openDoor = openDoor;
+window.eatTreat = eatTreat;
