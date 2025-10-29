@@ -1,5 +1,3 @@
-
-
 let calender
 let daysarray
 let dayobj
@@ -95,7 +93,7 @@ const eatTreat = (day) => {
     const image = daycont.querySelector('.treat')
     image.classList.add('taken')
 
-    openModal(header, text, confirmAct, cancelAct)
+    openRiddle(day);
 
     saveLocalStorage()
 }
