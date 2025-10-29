@@ -1,3 +1,5 @@
+import {openModal} from './utils.js'
+
 const riddleLib = [
   { title: "Bath Riddle",
     riddle: "What gets smaller every time it takes a bath?",
@@ -85,7 +87,7 @@ const riddleLib = [
 ];
 
 
-const openRiddle = (num) => {
+export const openRiddle = (num) => {
     const header = document.createElement('div');
     header.innerText = riddleLib[num].title;
 
