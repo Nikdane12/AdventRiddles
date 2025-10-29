@@ -1,3 +1,6 @@
+import {openRiddle} from './riddlesCode.js'
+import {openModal, removeSelf, createButton} from './utils.js'
+
 let calender
 let daysarray
 let dayobj
