@@ -19,13 +19,13 @@ const riddleLib = [
 
   { title: "Cat Warrior",
     riddle: "Why do cats make good warriors?",
-    answer: "Because they’ve got nine lives.", },
+    answer: "Because they've got nine lives.", },
 
-  { title: "Shirt Anatomy",
+  { title: "Strange Anatomy",
     riddle: "I have a neck, but no head. I have two arms, but no hands. What am I?",
     answer: "A shirt", },
 
-  { title: "Alphabet Riddle",
+  { title: "Letter Riddle",
     riddle: "What word contains 26 letters but only has three syllables?",
     answer: "Alphabet", },
 
@@ -37,7 +37,7 @@ const riddleLib = [
     riddle: "What five-letter word typed in all capital letters can be read the same upside down?",
     answer: "SWIMS", },
 
-  { title: "Footsteps",
+  { title: "What am I?",
     riddle: "The more you take, the more you leave behind. What am I?",
     answer: "Footsteps", },
 
@@ -65,7 +65,7 @@ const riddleLib = [
     riddle: "What goes up, but never comes down?",
     answer: "Age", },
 
-  { title: "Friday Horse",
+  { title: "Cowboy's Horse",
     riddle: "A cowboy rode into town on Friday. He stayed for three nights and rode out on Friday. How is this possible?",
     answer: "His horse's name is Friday.", },
 
