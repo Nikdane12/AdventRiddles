@@ -71,12 +71,15 @@
     gap: 20px;
 
     position: relative;
+
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 .modalClose{
     position: absolute;
-    width: max-content;
     cursor: pointer;
+    font-weight: 600;
+    font-size: 1.5em;
 
     float: right;
     right: 20px;
@@ -126,20 +129,39 @@
 }
 
 .spoiler {
-    width:fit-content;
-    margin: auto;
-    background: rgb(50, 50, 50);
-    color: transparent;
-    border-radius: .2em;
-    padding: 0 .2em;
-    transition: color .15s ease, background .15s ease;
+  position: relative;
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
+  margin: auto;
+  background: rgb(50, 50, 50);
+  color: transparent;
+  border-radius: .4em;
+  padding: .4em .9em;
+  transition: color .15s ease, background .15s ease;
+}
+
+.spoiler::after {
+  content: "( reveal )";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  color: #aaa;
+  font-size: .8em;
+  opacity: 1;
+  transition: opacity .15s ease;
+}   
+
+.spoiler:hover::after,
+.spoiler:focus-visible::after {
+  opacity: 0;
 }
 
 .spoiler:hover,
 .spoiler:focus-visible {
     color: inherit;
     background: transparent;
-    filter: none;
-    outline: 2px solid currentColor;
-    outline-offset: 2px;
 }

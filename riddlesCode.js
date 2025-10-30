@@ -1,5 +1,3 @@
-// import {openModal} from './utils.js'
-
 const riddleLib = [
   { title: "Bath Riddle",
     riddle: "What gets smaller every time it takes a bath?",
@@ -87,26 +85,24 @@ const riddleLib = [
 ];
 
 const openRiddle = (num) => {
-    if (num > riddleLib.length){
-        let offset = num - riddleLib.length;
-        num = offset;
-    }
-
+    num = (((num - 1) % riddleLib.length) + riddleLib.length) % riddleLib.length + 1;
+    const idx = num - 1;
+    
     const header = document.createElement('div');
-    header.innerText = riddleLib[num].title;
+    header.innerText = riddleLib[idx].title;
 
     const riddleBody = document.createElement('div');
     riddleBody.classList.add("riddlebody");
     
     const riddleText = document.createElement('div');
-    riddleText.innerText = riddleLib[num].riddle;
+    riddleText.innerText = riddleLib[idx].riddle;
     const answerText = document.createElement('div');
-    answerText.innerText = riddleLib[num].answer;
+    answerText.innerText = riddleLib[idx].answer;
     answerText.classList.add("spoiler");
     
     riddleBody.append(riddleText);
     riddleBody.append(answerText);
 
     
-    openModal(header, riddleBody, null, null, true)
+    openModal(header, riddleBody, null, null, true);
 }

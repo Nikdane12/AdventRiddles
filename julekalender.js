@@ -1,5 +1,3 @@
-// import {openRiddle} from './riddlesCode.js'
-
 let calender
 let daysarray
 let dayobj
