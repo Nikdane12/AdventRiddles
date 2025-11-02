@@ -4,6 +4,7 @@ const openModal = (header, text, confirmAct, cancelAct, close_but) => {
 
     const modal = document.createElement("div");
     modal.classList.add("modal");
+    modal.addEventListener('click', e => e.stopPropagation())
 
     const headerElement = document.createElement("div");
     headerElement.append(header);
@@ -21,7 +22,7 @@ const openModal = (header, text, confirmAct, cancelAct, close_but) => {
     if (close_but) {
         const closeButton = document.createElement('div');
         closeButton.append(document.createTextNode("X"))
-        closeButton.classList.add("modalClose");
+        closeButton.classList.add("modalClose", "noSelect");
         closeButton.addEventListener("click", (e) => {
             removeSelf([modalBACK])
         });
@@ -29,6 +30,7 @@ const openModal = (header, text, confirmAct, cancelAct, close_but) => {
     }
     
     modalBACK.append(modal)
+    modalBACK.addEventListener("click", (e) => {removeSelf([modalBACK])});
     document.body.append(modalBACK)
 
     if(confirmAct){
@@ -55,7 +57,9 @@ const openModal = (header, text, confirmAct, cancelAct, close_but) => {
 
 const removeSelf = divs => {
     divs.forEach(element => {
-        element.parentNode.removeChild(element);
+        if(element.parentNode){
+            element.parentNode.removeChild(element);
+        }
     });
 }
 

@@ -1,3 +1,15 @@
+@keyframes horizontal-shaking {
+ 0% { transform: translateX(0) }
+ 25% { transform: translateX(5px) }
+ 50% { transform: translateX(-5px) }
+ 75% { transform: translateX(5px) }
+ 100% { transform: translateX(0) }
+}
+
+.shake{
+  animation: horizontal-shaking 0.35s infinite;
+}
+
 body {
   margin: 0px;
   width: 100vw;
@@ -85,7 +97,13 @@ a:visited {
   transform: perspective(800px) rotateX(0deg) rotatey(0deg);
   -webkit-transform: perspective(800px) rotateX(0deg);
   z-index: 999;
+}
 
+.noSelect{
+  user-select: none;
+  -webkit-user-select: none; /* Safari/iOS */
+  -ms-user-select: none;     /* old Edge */
+  -webkit-touch-callout: none;
 }
 
 .daycont:nth-child(even)>.day {
@@ -154,3 +172,6 @@ img.taken {
   transform: perspective(800px) rotateY(100deg);
   transition: transform 0.75s ease;
 }
+
+
+

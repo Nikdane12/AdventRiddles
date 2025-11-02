@@ -34,7 +34,7 @@ const startup = () => {
         daycont.innerHTML = `
         <div class="daybackground ${display}"></div>
         <img class="treat ${takeTreat} ${display}" src="./${day.treat}.png" onclick="eatTreat(${day.day})"/>
-        <div class="day ${myanim}" onclick="openDoor(${day.day})">${day.day}</div>`
+        <div class="day ${myanim}" onclick="openDoor(${day.day})"><p class="noSelect">${day.day}</p></div>`
         calender.appendChild(daycont)
     }
 }
@@ -109,6 +109,7 @@ const unlock = () => {
 const openDoor = (day) => {
     if (unlockstatus == 'lock') {
         if (day > currentdate.getDate()) {
+            dontOpenDoor(day);
         }
         else {
             actuallyopeningday(day)
@@ -120,29 +121,38 @@ const openDoor = (day) => {
 }
 
 const actuallyopeningday = (day) => {
-    let newthing = daysarray.find(x => x.day == day)
+    const dayData = daysarray.find(x => x.day == day)
     const daycont = document.getElementById(day)
     const cover = daycont.querySelector('.day')        
     const treatimage = daycont.querySelector('.treat')
     const background = daycont.querySelector('.daybackground')
 
-    if (newthing.openstatus) {
-        cover.classList.remove(newthing.direction)
+    if (dayData.openstatus) {
+        cover.classList.remove(dayData.direction)
         cover.classList.remove('black')
         treatimage.classList.add('hide')
         background.classList.add('hide')
-        newthing.openstatus = false
+        dayData.openstatus = false
     }
     else {    
-        newthing.openstatus = true     
-        cover.classList.add(newthing.direction)
-        cover.classList.add(`origin${newthing.direction}`)
+        dayData.openstatus = true     
+        cover.classList.add(dayData.direction)
+        cover.classList.add(`origin${dayData.direction}`)
         cover.classList.add('black')
         treatimage.classList.remove('hide')
         background.classList.remove('hide')
     }
 
     saveLocalStorage()
+}
+
+const dontOpenDoor = (day) => {
+    const dayData = daysarray.find(x => x.day == day);
+    const daycont = document.getElementById(day);
+    daycont.classList.add('shake');    
+    setTimeout(() => {
+        daycont.classList.remove('shake');
+    }, 300);
 }
 
 const clearAdvents = () => {
