@@ -5,8 +5,11 @@ let day
 let lockbutton
 let unlockstatus
 let currentdate = new Date()
+let currentlang = "EN"
 
 const startup = () => {
+    
+    
     lockbutton = document.getElementById('unlock')
     unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
     if (unlockstatus == 'unlock') {
@@ -37,6 +40,10 @@ const startup = () => {
         <div class="day ${myanim}" onclick="openDoor(${day.day})"><p class="noSelect">${day.day}</p></div>`
         calender.appendChild(daycont)
     }
+
+    langbutton = document.getElementById('lang')
+    langstatus = localStorage.getItem('kalanderlangstatus') ?? 'EN'
+    setLang(langstatus)
 }
 
 const createDays = () => {
@@ -60,6 +67,7 @@ const createDays = () => {
 const saveLocalStorage = () => {
     localStorage.setItem('daysarray', JSON.stringify(daysarray))
     localStorage.setItem('kalanderlockstatus', unlockstatus)
+    localStorage.setItem('kalanderlangstatus', currentlang)
 }
 
 const getRandomDirection = () => {
@@ -89,8 +97,7 @@ const eatTreat = (day) => {
     const daycont = document.getElementById(day)
     const image = daycont.querySelector('.treat')
     image.classList.add('taken')
-
-    openRiddle(day);
+    openRiddle(day, currentlang);
 
     saveLocalStorage()
 }
@@ -160,6 +167,38 @@ const clearAdvents = () => {
     window.location.reload()
 }
 
+const mainTextDE = "Adventskalender"
+const mainTextEN = "Advent calendar"
+
+const setLang = (lang) => {
+const mainTitle = document.getElementById('mainTitle')
+let mainTitleText
+    switch (lang) {
+        case "EN":
+            currentlang = "EN"
+            mainTitleText = "Advent calendar";
+            break;
+        case "DE":
+            currentlang = "DE"
+            mainTitleText = "Adventskalender";
+
+            break;
+        default:
+            console.log("ERROR SET LANG");
+            break;
+    }
+    mainTitle.innerText = mainTitleText
+    saveLocalStorage()
+}
+
+const toggleLang = () => {
+    if(currentlang == "EN"){
+        setLang("DE")
+    } else {
+        setLang("EN")
+    }
+}
+
 // window.addEventListener('DOMContentLoaded', startup);
 
 window.startup = startup;
@@ -167,3 +206,4 @@ window.clearAdvents = clearAdvents;
 window.unlock = unlock;
 window.openDoor = openDoor;
 window.eatTreat = eatTreat;
+window.toggleLang = toggleLang;
