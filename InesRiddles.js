@@ -64,8 +64,8 @@ const MapRiddle = (lang) => {
     const countries = [
         { src: './images/mapRiddle/france.png', left: '60%', top: '20%', scale: 1,},
         { src: './images/mapRiddle/norway.png', left: '43%', top: '5%', scale: 1,},
-        { src: './images/mapRiddle/poland.png', left: '20%', top: '50%', scale: 1,},
-        { src: './images/mapRiddle/sweden.png', left: '60%', top: '40%', scale: 0.73,},
+        { src: './images/mapRiddle/poland.png', left: '15%', top: '50%', scale: 1,},
+        { src: './images/mapRiddle/sweden.png', left: '70%', top: '50%', scale: 0.73,},
     ];
 
     countries.forEach(c => {
@@ -104,7 +104,7 @@ const ElvesRiddle = (lang) => {
 
 
 
-    const photoPos = [
+    const photoPos = [ // in %
         { file: "camera", X: -46.8, Y: 84.3 },
         { file: "potion", X: -25.4, Y: 10.1 },
         { file: "ring", X: -42.4, Y: 15.3 },
@@ -275,26 +275,138 @@ const MatchRiddle = (lang) => {
     return container;
 }
 
+const sudokuRiddle = (lang) => {
+    let sudokuText
+    if (lang == "EN"){sudokuText = document.createTextNode("Santa Claus also secretly loves to take part in the Christmas Sudoku Championship. However, he just can't seem to make any progress. Can you help him? Name the three symbols in the three black circles.")}
+    else {sudokuText = document.createTextNode("Der Weihnachtsmann liebt auch im Geheimen an der Weihnachtssudoku Meisterschaft teilzunehmen. Allerdings kommt er einfach nicht weiter. Kannst du ihm helfen? Nenne die drei Symbole, in den drei schwarzen Kreise.")}
+    
+    const riddleCont = document.createElement('div')
+    riddleCont.appendChild(sudokuText);
+
+    const imageLib = {
+        1: "star",
+        2: "tree",
+        3: "wreath",
+        4: "gift",
+        5: "bauble",
+        6: "candle",
+        7: "people",
+        8: "calendar", 
+        9: "heart",
+    };
+    const puzzle = [
+        [[0, 6, 0], [4, 0, 0], [1, 0, 0]],
+        [[0, 0, 0], [0, 6, 0], [0, 5, 0]],
+        [[4, 0, 5], [0, 0, 0], [9, 0, 0]],
+        [[5, 0, 0], [0, 0, 4], [8, 0, 0]],
+        [[2, 0, 0], [0, 0, 9], [0, 0, 3]],
+        [[3, 1, 0], [7, 0, 5], [0, 4, 0]],
+        [[0, 3, 8], [0, 0, 7], [0, 0, 4]],
+        [[0, 0, 0], [0, 2, 0], [0, 0, 0]],
+        [[7, 0, 0], [0, 0, 1], [6, 0, 0]],
+    ];
+    const renderCell = (value) => {
+        if (value === 0) return "";
+        const name = imageLib[value];
+        return `<img src="./images/sudokuRiddle/${name}.png" alt="${name}">`;
+    };
+
+    const sudokuCont = document.createElement('div')
+    Object.assign(sudokuCont.style, {
+        display: 'flex',
+        flexDirection: 'column',
+        boxSizing: 'border-box',
+    });
+
+    puzzle.forEach((rowBlocks, rowIndex) => {
+        const rowDiv = document.createElement('div');
+        Object.assign(rowDiv.style, {
+            display: 'flex',
+        });
+
+        let colIndex = 0;
+
+        rowBlocks.forEach(block => {
+            block.forEach(value => {
+                const cell = document.createElement('div');
+
+                Object.assign(cell.style, {
+                    position: 'relative',
+                    width: '60px',
+                    height: '60px',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    border: '1px solid #ccc',
+                    boxSizing: 'border-box',
+                });
+
+                if (rowIndex % 3 === 0) {
+                    cell.style.borderTopWidth = '3px';
+                    cell.style.borderTopColor = '#333';
+                }
+                if (colIndex % 3 === 0) {
+                    cell.style.borderLeftWidth = '3px';
+                    cell.style.borderLeftColor = '#333';
+                }
+                if (rowIndex === 8) {
+                    cell.style.borderBottomWidth = '3px';
+                    cell.style.borderBottomColor = '#333';
+                }
+                if (colIndex === 8) {
+                    cell.style.borderRightWidth = '3px';
+                    cell.style.borderRightColor = '#333';
+                }
+
+                const content = renderCell(value);
+
+                if (content instanceof HTMLElement) {
+                    cell.appendChild(content);
+                } else if (typeof content === 'string') {
+                    cell.innerHTML = content;
+                }
+
+                rowDiv.appendChild(cell);
+                colIndex++;
+            });
+        });
+        sudokuCont.appendChild(rowDiv)
+    });
+    riddleCont.appendChild(sudokuCont)
+
+    return riddleCont
+}
+
 const riddleLib = [
-    {title: "Map Riddle",
-    riddle: MapRiddle,},
-    {title: "Elves Riddle",
-    riddle: ElvesRiddle,},
-    {title: "Match Riddle",
-    riddle: MatchRiddle,},
+    {
+        title: "Map Riddle",
+        riddle: MapRiddle,
+    },
+    {
+        title: "Elves Riddle",
+        riddle: ElvesRiddle,
+    },
+    {
+        title: "Match Riddle",
+        riddle: MatchRiddle,
+    },
+    {
+        title: "Sudoku Riddle",
+        riddle: sudokuRiddle,
+    },
 ]
 
 const openRiddle = (num, lang) => {
     num = (((num - 1) % riddleLib.length) + riddleLib.length) % riddleLib.length + 1;
     const idx = num - 1;
-    
+
     const header = document.createElement('div');
     header.innerText = riddleLib[idx].title;
 
     const riddleBody = document.createElement('div');
     riddleBody.classList.add("riddlebody");
-    
+
     riddleBody.append(riddleLib[idx].riddle(lang))
-    
+
     openModal(header, riddleBody, null, null, true);
 }

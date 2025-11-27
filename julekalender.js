@@ -8,8 +8,6 @@ let currentdate = new Date()
 let currentlang = "EN"
 
 const startup = () => {
-    
-    
     lockbutton = document.getElementById('unlock')
     unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
     if (unlockstatus == 'unlock') {
@@ -22,6 +20,7 @@ const startup = () => {
 
     if (daysarray.length < 1) { createDays() }
     calender = document.getElementById('calender')
+    changeGridOri()
 
     for (var i = 0; i < 24; ++i) {
         const day = daysarray.find(x => x.position == i)
@@ -207,3 +206,16 @@ window.unlock = unlock;
 window.openDoor = openDoor;
 window.eatTreat = eatTreat;
 window.toggleLang = toggleLang;
+
+window.addEventListener('keydown', function(event) {
+  if (event.key === 'p') {
+    window.print();
+    console.log('p key pressed!');
+  }
+})
+
+const changeGridOri = () => {
+    if(window.innerWidth > window.innerHeight){calender.className = '';calender.classList.add("land")}
+    else{calender.className = '';calender.classList.add("port")}
+}
+window.addEventListener('resize', changeGridOri);

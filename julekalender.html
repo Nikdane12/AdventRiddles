@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./modal.css">
+    <link rel="stylesheet" href="./julekalander.css">
+
+    <script src="./julekalender.js"></script>
+    
+    <title>Julekalender</title>
+</head>
+<body onload="startup()"> 
+    <script src="./utils.js"></script>
+    <!-- <script src="./riddlesCode.js"></script> -->
+    <script src="./InesRiddles.js"></script>
+    
+    <div id="mainTitle">Julekalender</div>
+    <div class="settings-cont">
+        <div id="clear" onclick="clearAdvents()">↺</div>
+        <div id="unlock" onclick="unlock()"></div>
+        <div id="lang" onclick="toggleLang()">EN/DE</div>
+    </div>
+    <div id="calender"></div>
+    
+</body>
+</html>

@@ -55,11 +55,21 @@ a:visited {
   /* display: flex;
   gap: 20px; */
   display: grid;
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  grid-template-rows: auto auto auto;
+  /* grid-template-columns: auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto; */
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+
+#calender.land {
+  grid-template-columns: auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto;
+}
+#calender.port{
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
 }
 
 .daycont {
