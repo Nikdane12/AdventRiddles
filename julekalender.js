@@ -210,7 +210,6 @@ window.toggleLang = toggleLang;
 window.addEventListener('keydown', function(event) {
   if (event.key === 'p') {
     window.print();
-    console.log('p key pressed!');
   }
 })
 
