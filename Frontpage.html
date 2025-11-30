@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Riddle Advent Calendar — Front Page</title>
+<style>
+  :root{
+    --bg1:#0f1724;
+    --bg2:#1b2a4a;
+    --accent:#ffcf33;
+    --accent-2:#ff6b6b;
+    --card:#ffffffcc;
+    --glass: rgba(255,255,255,0.06);
+    --glass-2: rgba(255,255,255,0.04);
+    --muted: #e8eefc;
+    --shadow: 0 8px 30px rgba(2,6,23,0.6);
+    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  /* Page layout */
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:var(--font-sans);
+    background: radial-gradient(1200px 600px at 10% 20%, rgba(255,223,120,0.06), transparent),
+                linear-gradient(180deg,var(--bg1), var(--bg2) 55%);
+    color:var(--muted);
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px;
+  }
+
+  /* Center card */
+  .card{
+    width:100%;
+    max-width:1100px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+    border-radius:18px;
+    padding:28px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.04);
+  }
+
+  /* festive ribbon */
+  .ribbon{
+    position:absolute;
+    left:-120px;
+    top:-80px;
+    width:520px;
+    height:220px;
+    background: linear-gradient(135deg,var(--accent-2), var(--accent));
+    transform:rotate(-18deg);
+    border-radius:30px;
+    filter:drop-shadow(0 8px 24px rgba(0,0,0,0.6));
+    opacity:0.95;
+  }
+  .ribbon::after{
+    content:"";
+    position:absolute;
+    right:-40px;
+    bottom:-20px;
+    width:90px;height:90px;
+    background:radial-gradient(circle at 30% 30%, rgba(255,255,255,0.25), transparent 40%);
+    border-radius:12px;
+  }
+
+  .header{
+    display:flex;
+    gap:16px;
+    align-items:center;
+    justify-content:space-between;
+    position:relative;
+    z-index:2;
+  }
+
+  .left-controls{
+    display:flex;
+    gap:12px;
+    align-items:center;
+  }
+
+  .reload-btn{
+    background:var(--glass);
+    border:1px solid rgba(255,255,255,0.06);
+    color:var(--muted);
+    padding:8px 10px;
+    border-radius:10px;
+    cursor:pointer;
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    font-weight:600;
+  }
+  .reload-btn svg{width:18px;height:18px; display:block; opacity:0.95}
+
+  .lang-toggle{
+    background:transparent;
+    color:var(--muted);
+    border:1px solid rgba(255,255,255,0.06);
+    padding:8px 10px;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:600;
+  }
+
+  .title{
+    margin-top:14px;
+    margin-bottom:10px;
+    z-index:2;
+  }
+  h1{
+    margin:0;
+    font-size: clamp(20px, 3.8vw, 32px);
+    letter-spacing: -0.6px;
+    color: white;
+    text-shadow: 0 6px 30px rgba(0,0,0,0.6);
+  }
+  p.lead{
+    margin:8px 0 18px 0;
+    color: #f3f6ff;
+    opacity:0.92;
+    line-height:1.45;
+    max-width:72ch;
+  }
+
+  .main-grid{
+    display:grid;
+    grid-template-columns: 1fr 360px;
+    gap:20px;
+    align-items:start;
+  }
+
+  /* big button */
+  .big-action{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:16px;
+    font-weight:800;
+    font-size: clamp(18px, 2.6vw, 22px);
+    padding:20px;
+    border-radius:14px;
+    background:linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+    border: 2px solid rgba(255,255,255,0.06);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.45);
+    color:white;
+    text-decoration:none;
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .big-action:hover{ transform: translateY(-6px); box-shadow:0 20px 50px rgba(0,0,0,0.55); }
+
+  .big-action .btn-inner{
+    display:flex; gap:12px; align-items:center;
+  }
+
+  /* left column content */
+  .story{
+    padding:18px;
+    border-radius:12px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border:1px solid rgba(255,255,255,0.03);
+  }
+
+  .credits{
+    margin-top:14px;
+    font-size:13px;
+    color:rgba(255,255,255,0.86);
+  }
+
+  /* scoreboard on right */
+  .scoreboard{
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border-radius:12px;
+    padding:14px;
+    border:1px solid rgba(255,255,255,0.03);
+  }
+  .scoreboard h3{ margin:6px 0 12px 0; font-size:16px; color:white }
+  table.scores{
+    width:100%;
+    border-collapse:collapse;
+    font-size:14px;
+  }
+  table.scores th, table.scores td{
+    text-align:left;
+    padding:8px 6px;
+    border-bottom:1px dashed rgba(255,255,255,0.03);
+    color:var(--muted);
+  }
+  table.scores tbody tr:first-child td{ font-weight:700; color:var(--accent) }
+  .controls{
+    margin-top:12px;
+    display:flex;
+    gap:8px;
+    align-items:center;
+  }
+  input[type="text"], input[type="number"]{
+    padding:8px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.06);
+    background:transparent;
+    color:var(--muted);
+    outline:none;
+    width:100%;
+  }
+  .form-row{
+    display:flex;
+    gap:8px;
+    margin-top:8px;
+  }
+  .small-btn{
+    background:var(--glass);
+    padding:8px 10px;
+    border-radius:8px;
+    border:1px solid rgba(255,255,255,0.05);
+    color:var(--muted);
+    cursor:pointer;
+    font-weight:700;
+  }
+  .small-btn.warn{ background:transparent; color:#ffb3b3; border-color:rgba(255,107,107,0.12) }
+
+  /* snow (decorative) */
+  .snow{
+    pointer-events:none;
+    position:absolute;
+    inset:0;
+    z-index:0;
+    background-image: radial-gradient(circle at 10% 10%, rgba(255,255,255,0.03) 0 1px, transparent 1px),
+                      radial-gradient(circle at 40% 30%, rgba(255,255,255,0.02) 0 1px, transparent 1px),
+                      radial-gradient(circle at 70% 70%, rgba(255,255,255,0.015) 0 1px, transparent 1px);
+    background-size: 100px 100px, 160px 160px, 220px 220px;
+    opacity:0.8;
+    transform: translateZ(0);
+  }
+
+  /* responsive */
+  @media (max-width:920px){
+    .main-grid{ grid-template-columns:1fr; }
+    .scoreboard{ order:2; margin-top:10px; }
+    .big-action{ width:100%; justify-content:center }
+  }
+</style>
+</head>
+<body>
+  <div class="card" role="main" aria-labelledby="pageTitle">
+    <div class="ribbon" aria-hidden="true"></div>
+
+    <div class="header">
+      <div class="left-controls">
+        <button class="reload-btn" id="reloadBtn" title="Reload / Seite neu laden / Aktualisieren">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21 12a9 9 0 1 0-2.54 6.01" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M21 3v6h-6" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span data-i18n="reload">Reload</span>
+        </button>
+        <button class="lang-toggle" id="langToggle" aria-pressed="false" title="Switch language / Sprache wechseln">DE / EN</button>
+      </div>
+
+      <div style="text-align:right; z-index:2;">
+        <div style="font-size:12px; opacity:0.9">Advent Riddle Calendar</div>
+        <div style="font-size:11px; opacity:0.6">Front Page</div>
+      </div>
+    </div>
+
+    <div class="title" style="z-index:2">
+      <h1 id="pageTitle">Riddle Advent Calendar</h1>
+      <p class="lead" id="introText">
+        The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
+        Every day brings exciting challenges and puzzles. You can refresh the webpage at the top left corner to see the daily puzzle in its original form.
+        You can also change the language to English or German.
+        Don’t hesitate to ask me if you get stuck at any point. Feel free to send me your answers — you’ll earn more points if you submit them on the same day!
+        At the end, the person with the highest score will be rewarded with a delightful surprise. Have fun solving the puzzles and enjoy this wonderful Advent season!
+        Your Secret Santas, Ines, Nikolai, Tim
+      </p>
+    </div>
+
+    <div class="main-grid" role="region" aria-label="Main content">
+      <section class="story" aria-labelledby="whoTitle">
+        <a class="big-action" id="openCalendar" href="calendar.html" role="button" aria-label="Open Advent Calendar">
+          <span class="btn-inner">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="3" y="4" width="18" height="14" rx="2" stroke="white" stroke-width="1.6" />
+              <path d="M7 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M12 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+              <path d="M17 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+            Open the Advent Calendar
+          </span>
+        </a>
+
+        <div style="margin-top:18px;">
+          <h3 id="whoTitle" style="margin:0 0 6px 0; color:#fff">Welcome</h3>
+          <div id="storyText">
+            <!-- bilingual copy inserted by JS -->
+          </div>
+
+          <p class="credits" style="margin-top:14px">
+            <strong data-i18n="greeting">Eure Wichtel / Your Secret Santas</strong><br />
+            Ines, Nikolai, Tim
+          </p>
+        </div>
+      </section>
+
+      <aside class="scoreboard" aria-labelledby="scoreTitle">
+        <h3 id="scoreTitle">Scoreboard</h3>
+
+        <table class="scores" aria-describedby="scoreDesc">
+          <thead>
+            <tr><th>#</th><th>Player</th><th style="text-align:right">Points</th></tr>
+          </thead>
+          <tbody id="scoreBody">
+            <!-- rows populated by JS -->
+          </tbody>
+        </table>
+
+        <div class="controls" style="margin-top:8px;">
+          <div style="flex:1">
+            <label style="font-size:12px;opacity:0.8">Name</label>
+            <input type="text" id="playerName" placeholder="Anna" aria-label="Player name" />
+          </div>
+          <div style="width:110px">
+            <label style="font-size:12px;opacity:0.8">Points</label>
+            <input type="number" id="playerPoints" value="0" min="0" aria-label="Points" />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <button class="small-btn" id="addScoreBtn">Add / Hinzufügen</button>
+          <label style="display:inline-flex; gap:8px; align-items:center; font-size:13px;">
+            <input type="checkbox" id="sameDayBonus" aria-label="Same day bonus" /> <span style="opacity:0.9">Same-day bonus</span>
+          </label>
+          <button class="small-btn warn" id="resetBtn" title="Reset scoreboard">Reset</button>
+        </div>
+
+        <p id="scoreDesc" style="margin-top:8px; font-size:12px; opacity:0.8">
+          Submit answers to get points. (This demo scoreboard is stored locally in your browser.)
+        </p>
+      </aside>
+    </div>
+
+    <div class="snow" aria-hidden="true"></div>
+  </div>
+
+<script>
+  // bilingual texts (exact texts from user)
+  const texts = {
+    de: {
+      title: "Rätsel Adventskalender",
+      intro: `Es ist wieder soweit – die Weihnachtszeit steht vor der Tür! Unser Adventskalender erstrahlt in voller Pracht und wartet darauf, von euch geöffnet zu werden.
+Jeden Tag erwarten euch spannende Aufgaben und Rätsel. Oben links könnt ihr die Webseite neu laden, um das Tagesrätsel in seiner originalen Form zu sehen. Du kannst den Adventskalender auch in Englisch haben.
+Habt keine Scheu, mich zu fragen, falls ihr einmal nicht weiterkommt. Schickt mir eure Antworten gerne zu – wer die Aufgaben am selben Tag einsendet, erhält sogar mehr Punkte!
+Am Ende wird die Person mit den meisten Punkten mit einer freudigen Überraschung belohnt. Viel Spaß beim Rätseln und eine wundervolle Adventszeit!
+
+Eure Wichtel Ines, Nikolai, Tim`,
+      openBtn: "Adventskalender öffnen",
+      reload: "Neu laden",
+      greeting: "Eure Wichtel"
+    },
+    en: {
+      title: "Riddle Advent Calendar",
+      intro: `The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
+Every day brings exciting challenges and puzzles. You can refresh the webpage at the top left corner to see the daily puzzle in its original form. You can also change the language to English or German.
+Don’t hesitate to ask me if you get stuck at any point. Feel free to send me your answers — you’ll earn more points if you submit them on the same day!
+At the end, the person with the highest score will be rewarded with a delightful surprise. Have fun solving the puzzles and enjoy this wonderful Advent season!
+
+Your Secret Santas, Ines, Nikolai, Tim`,
+      openBtn: "Open the Advent Calendar",
+      reload: "Reload",
+      greeting: "Your Secret Santas"
+    }
+  };
+
+  // initial language
+  let lang = localStorage.getItem('advent_lang') || 'en';
+  const pageTitle = document.getElementById('pageTitle');
+  const introText = document.getElementById('introText');
+  const openCalendar = document.getElementById('openCalendar');
+  const langToggle = document.getElementById('langToggle');
+  const reloadBtn = document.getElementById('reloadBtn');
+  const storyText = document.getElementById('storyText');
+  const greetingEl = document.querySelector('[data-i18n="greeting"]');
+
+  function applyLang(){
+    const t = texts[lang];
+    pageTitle.textContent = t.title;
+    introText.textContent = t.intro;
+    openCalendar.innerHTML = `<span class="btn-inner"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="4" width="18" height="14" rx="2" stroke="white" stroke-width="1.6" /><path d="M7 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M12 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/><path d="M17 9v6" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg> ${t.openBtn}</span>`;
+    reloadBtn.querySelector('span').textContent = t.reload;
+    greetingEl.textContent = t.greeting + ',';
+    langToggle.setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
+    // story area gets same as intro for convenience
+    storyText.textContent = t.intro;
+    localStorage.setItem('advent_lang', lang);
+  }
+  applyLang();
+
+  langToggle.addEventListener('click', () => {
+    lang = (lang === 'en') ? 'de' : 'en';
+    applyLang();
+  });
+
+  reloadBtn.addEventListener('click', () => {
+    // reload the page (user asked for this behavior in the text)
+    location.reload();
+  });
+
+  // Scoreboard data + UI
+  const scoreKey = 'advent_scoreboard_v1';
+  function loadScores(){
+    try{
+      const raw = localStorage.getItem(scoreKey);
+      return raw ? JSON.parse(raw) : [];
+    }catch(e){
+      return [];
+    }
+  }
+  function saveScores(list){
+    localStorage.setItem(scoreKey, JSON.stringify(list));
+  }
+
+  function renderScores(){
+    const list = loadScores();
+    // sort descending by points
+    list.sort((a,b) => b.points - a.points);
+    const tbody = document.getElementById('scoreBody');
+    tbody.innerHTML = '';
+    if(list.length === 0){
+      tbody.innerHTML = '<tr><td colspan="3" style="opacity:0.75">No scores yet</td></tr>';
+      return;
+    }
+    list.forEach((row,i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td style="width:28px">${i+1}</td>
+                      <td>${escapeHtml(row.name)}</td>
+                      <td style="text-align:right; font-weight:700">${row.points}</td>`;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // small helper to avoid naive injection
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, function(m){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]; }); }
+
+  document.getElementById('addScoreBtn').addEventListener('click', () => {
+    const name = document.getElementById('playerName').value.trim();
+    let points = Number(document.getElementById('playerPoints').value) || 0;
+    const sameDay = document.getElementById('sameDayBonus').checked;
+    if(!name){
+      alert(lang === 'de' ? 'Bitte Name eingeben.' : 'Please enter a name.');
+      return;
+    }
+    if(sameDay){
+      // same-day bonus: add 2 points (you may change this number)
+      points += 2;
+    }
+    const list = loadScores();
+    // if player exists, add to their points, else create
+    const idx = list.findIndex(r => r.name.toLowerCase() === name.toLowerCase());
+    if(idx >= 0){
+      list[idx].points = Number(list[idx].points) + points;
+    }else{
+      list.push({ name: name, points: Number(points) });
+    }
+    saveScores(list);
+    renderScores();
+    // clear inputs partially
+    document.getElementById('playerName').value = '';
+    document.getElementById('playerPoints').value = '0';
+    document.getElementById('sameDayBonus').checked = false;
+  });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if(confirm(lang === 'de' ? 'Scoreboard wirklich zurücksetzen?' : 'Really reset the scoreboard?')){
+      localStorage.removeItem(scoreKey);
+      renderScores();
+    }
+  });
+
+  // init
+  renderScores();
+
+  // Accessibility: open calendar with Enter on big-action
+  openCalendar.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter' || e.key === ' '){ openCalendar.click(); e.preventDefault(); }
+  });
+
+  // optional: link to real calendar page is calendar.html — update href if needed
+</script>
+</body>
+</html>
