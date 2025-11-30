@@ -1,12 +1,449 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Riddle Advent Calendar — Front Page</title>
+  <style>
+    :root {
+      --bg1: #0f1724;
+      --bg2: #1b2a4a;
+      --accent: #ffcf33;
+      --accent-2: #ff6b6b;
+      --card: #ffffffcc;
+      --glass: rgba(255, 255, 255, 0.06);
+      --glass-2: rgba(255, 255, 255, 0.04);
+      --text: #e8eefc;
+      --shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
+      --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Page layout */
+    * {
+      box-sizing: border-box
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      position: relative;
+      margin: 0;
+      font-family: var(--font-sans);
+      background-image: url('./images/frontPageBackground.jpg');
+      backdrop-filter: blur(2px);
+      background-size: contain;
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;              /* covers viewport even when scrolling */
+      inset: 0;
+      background: rgba(0,0,0,0.55); /* adjust darkness here */
+      z-index: -1;                  /* sits behind all content */
+      pointer-events: none;         /* so it doesn’t block clicks */
+    }
+
+    /* Center card */
+    .card {
+      width: 100%;
+      max-width: 1100px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+
+    }
+
+    .header {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      z-index: 2;
+    }
+
+    .left-controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .reload-btn {
+      background: var(--glass);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      color: var(--text);
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      font-weight: 600;
+    }
+
+    .reload-btn svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+      opacity: 0.95
+    }
+
+    .lang-toggle {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 8px 10px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .title {
+      margin-top: 14px;
+      margin-bottom: 10px;
+      z-index: 2;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(20px, 3.8vw, 32px);
+      letter-spacing: -0.6px;
+      color: var(--text);
+      text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
+    }
+
+    p.lead {
+      margin: 8px 0 18px 0;
+      color: #f3f6ff;
+      opacity: 0.92;
+      line-height: 1.45;
+      max-width: 72ch;
+    }
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 20px;
+      align-items: start;
+    }
+
+    /* big button */
+    .big-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      font-weight: 800;
+      font-size: clamp(18px, 2.6vw, 22px);
+      padding: 20px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+      border: 2px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+      color: white;
+      text-decoration: none;
+      transition: transform .14s ease, box-shadow .14s ease;
+    }
+
+    .big-action:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .big-action .btn-inner {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    /* left column content */
+    .story {
+      padding: 18px;
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .credits {
+      margin-top: 14px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.86);
+    }
+
+    /* scoreboard on right */
+    .scoreboard {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.03);
+    }
+
+    .scoreboard h3 {
+      margin: 6px 0 12px 0;
+      font-size: 16px;
+      color: white
+    }
+
+    table.scores {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    table.scores th,
+    table.scores td {
+      text-align: left;
+      padding: 8px 6px;
+      border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
+      color: var(--text);
+    }
+
+    table.scores tbody tr:first-child td {
+      font-weight: 700;
+      color: var(--accent)
+    }
+
+    .controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      background: transparent;
+      color: var(--text);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .small-btn {
+      background: var(--glass);
+      padding: 8px 10px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      cursor: pointer;
+      font-weight: 700;
+    }
+
+    .small-btn.warn {
+      background: transparent;
+      color: #ffb3b3;
+      border-color: rgba(255, 107, 107, 0.12)
+    }
+
+    /* snow (decorative) */
+    .snow {
+      pointer-events: none;
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      background-image: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px),
+        radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px);
+      background-size: 100px 100px, 160px 160px, 220px 220px;
+      opacity: 0.8;
+      transform: translateZ(0);
+    }
+
+    /* responsive */
+    @media (max-width:920px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .scoreboard {
+        order: 2;
+        margin-top: 10px;
+      }
+
+      .big-action {
+        width: 100%;
+        justify-content: center
+      }
+    }
+  </style>
 </head>
+
 <body>
-    <div>This is the FRONT PAGE</div>
-    <a href="./julekalender.html">HERE IS THE CALANDER</a>
+  <div class="card" role="main" aria-labelledby="pageTitle">
+    <div class="header">
+      <div class="left-controls">
+        <button class="lang-toggle" id="langToggle" aria-pressed="false" title="Switch language / Sprache wechseln">EN /
+          DE</button>
+      </div>
+    </div>
+
+    <div class="title" style="z-index:1000">
+      <h1 id="pageTitle">Riddle Advent Calendar</h1>
+    </div>
+
+    <div class="main-grid" role="region" aria-label="Main content">
+      <section class="story" aria-labelledby="whoTitle">
+        <a class="big-action" id="openCalendar" href="julekalender.html" role="button"
+          aria-label="Open Advent Calendar">
+          Open the Advent Calendar
+        </a>
+
+        <div style="margin-top:18px;">
+          <h3 id="whoTitle" style="margin:0 0 6px 0; color:#fff">Welcome</h3>
+          <div id="storyText">
+            <!-- bilingual copy inserted by JS -->
+          </div>
+
+          <p class="credits" style="margin-top:14px">
+            <strong data-i18n="greeting">Eure Wichtel / Your Secret Santas</strong><br />
+            Ines, Nikolai, Tim
+          </p>
+        </div>
+      </section>
+
+      <aside class="scoreboard" aria-labelledby="scoreTitle">
+        <h3 id="scoreTitle">Scoreboard</h3>
+
+        <table class="scores" aria-describedby="scoreDesc">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Player</th>
+              <th style="text-align:right">Points</th>
+            </tr>
+          </thead>
+          <tbody id="scoreBody">
+          </tbody>
+        </table>
+
+        <div class="controls" style="margin-top:8px;">
+          <div style="flex:1">
+            <label style="font-size:12px;opacity:0.8">Name</label>
+            <input type="text" id="playerName"/>
+          </div>
+        </div>
+
+        <p id="scoreDesc" style="margin-top:8px; font-size:12px; opacity:0.8">
+          Submit answers to get points. Get more points when answering on the day of.
+        </p>
+      </aside>
+    </div>
+
+    <div class="snow" aria-hidden="true"></div>
+  </div>
+  <script src="./scores.js"></script>
+  <script>
+    // bilingual texts (exact texts from user)
+    const texts = {
+      de: {
+        title: "Rätsel Adventskalender",
+        intro: `Es ist wieder soweit – die Weihnachtszeit steht vor der Tür! Unser Adventskalender erstrahlt in voller Pracht und wartet darauf, von euch geöffnet zu werden.
+Jeden Tag erwarten euch spannende Aufgaben und Rätsel. Oben links könnt ihr die Webseite neu laden, um das Tagesrätsel in seiner originalen Form zu sehen. Du kannst den Adventskalender auch in Englisch haben.
+Habt keine Scheu, mich zu fragen, falls ihr einmal nicht weiterkommt. Schickt mir eure Antworten gerne zu – wer die Aufgaben am selben Tag einsendet, erhält sogar mehr Punkte!
+Am Ende wird die Person mit den meisten Punkten mit einer freudigen Überraschung belohnt. Viel Spaß beim Rätseln und eine wundervolle Adventszeit!
+
+Eure Wichtel Ines, Nikolai, Tim`,
+        openBtn: "Adventskalender öffnen",
+        reload: "Neu laden",
+        greeting: "Eure Wichtel"
+      },
+      en: {
+        title: "Riddle Advent Calendar",
+        intro: `The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
+Every day brings exciting challenges and puzzles. You can refresh the webpage at the top left corner to see the daily puzzle in its original form. You can also change the language to English or German.
+Don’t hesitate to ask me if you get stuck at any point. Feel free to send me your answers — you’ll earn more points if you submit them on the same day!
+At the end, the person with the highest score will be rewarded with a delightful surprise. Have fun solving the puzzles and enjoy this wonderful Advent season!
+
+Your Secret Santas, Ines, Nikolai, Tim`,
+        openBtn: "Open the Advent Calendar",
+        reload: "Reload",
+        greeting: "Your Secret Santas"
+      }
+    };
+
+    // initial language
+    let lang = localStorage.getItem('advent_lang') || 'en';
+    const pageTitle = document.getElementById('pageTitle');
+    const openCalendar = document.getElementById('openCalendar');
+    const langToggle = document.getElementById('langToggle');
+    const storyText = document.getElementById('storyText');
+    const greetingEl = document.querySelector('[data-i18n="greeting"]');
+
+
+
+    const applyLang = () => {
+      const t = texts[lang];
+      pageTitle.textContent = t.title;
+      openCalendar.textContent = t.openBtn;
+      greetingEl.textContent = t.greeting + ',';
+      langToggle.setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
+      // story area gets same as intro for convenience
+      storyText.textContent = t.intro;
+      localStorage.setItem('advent_lang', lang);
+    }
+    applyLang();
+
+    langToggle.addEventListener('click', () => {
+      lang = (lang === 'en') ? 'de' : 'en';
+      applyLang();
+    });
+
+
+    // Scoreboard data + UI
+    const scoreKey = 'advent_scoreboard_v1';
+
+    const renderScores = () => {
+      const list = scores;
+      // sort descending by points
+      list.sort((a, b) => b.points - a.points);
+      const tbody = document.getElementById('scoreBody');
+      tbody.innerHTML = '';
+      if (list.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="3" style="opacity:0.75">No scores yet</td></tr>';
+        return;
+      }
+      list.forEach((row, i) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td style="width:28px">${i + 1}</td>
+                      <td>${row.name}</td>
+                      <td style="text-align:right; font-weight:700">${row.points}</td>`;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // init
+    renderScores();
+
+    // Accessibility: open calendar with Enter on big-action
+    openCalendar.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { openCalendar.click(); e.preventDefault(); }
+    });
+
+    // optional: link to real calendar page is calendar.html — update href if needed
+  </script>
 </body>
+
 </html>
