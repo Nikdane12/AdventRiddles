@@ -47,7 +47,7 @@
 
     body::before {
       content: "";
-      position: fixed;
+      position: sticky;
       inset: 0;
       background: rgba(0, 0, 0, 0.55);
       z-index: -1;
@@ -327,24 +327,20 @@
     const texts = {
       DE: {
         title: "Rätsel Adventskalender",
-        intro: `Es ist wieder soweit – die Weihnachtszeit steht vor der Tür! Unser Adventskalender erstrahlt in voller Pracht und wartet darauf, von euch geöffnet zu werden.
+        intro: `<p>Es ist wieder soweit – die Weihnachtszeit steht vor der Tür! Unser Adventskalender erstrahlt in voller Pracht und wartet darauf, von euch geöffnet zu werden.
 Jeden Tag erwarten euch spannende Aufgaben und Rätsel. Oben links könnt ihr die Webseite neu laden, um das Tagesrätsel in seiner originalen Form zu sehen. Du kannst den Adventskalender auch in Englisch haben.
-Habt keine Scheu, mich zu fragen, falls ihr einmal nicht weiterkommt. Schickt mir eure Antworten gerne zu – wer die Aufgaben am selben Tag einsendet, erhält sogar mehr Punkte!
-Am Ende wird die Person mit den meisten Punkten mit einer freudigen Überraschung belohnt. Viel Spaß beim Rätseln und eine wundervolle Adventszeit!
-
-Eure Wichtel Ines, Nikolai, Tim`,
+Habt keine Scheu, mich zu fragen, falls ihr einmal nicht weiterkommt. <strong> Schickt mir eure Antworten </strong> gerne zu – wer die Aufgaben am selben Tag einsendet, erhält sogar mehr Punkte!
+Am Ende wird die Person mit den meisten Punkten mit einer freudigen Überraschung belohnt. Viel Spaß beim Rätseln und eine wundervolle Adventszeit!</p>`,
         openBtn: "Adventskalender öffnen",
         reload: "Neu laden",
         greeting: "Eure Wichtel"
       },
       EN: {
         title: "Riddle Advent Calendar",
-        intro: `The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
+        intro: `<p>The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
 Every day brings exciting challenges and puzzles. You can refresh the webpage at the top left corner to see the daily puzzle in its original form. You can also change the language to English or German.
-Don’t hesitate to ask me if you get stuck at any point. Feel free to send me your answers — you’ll earn more points if you submit them on the same day!
-At the end, the person with the highest score will be rewarded with a delightful surprise. Have fun solving the puzzles and enjoy this wonderful Advent season!
-
-Your Secret Santas, Ines, Nikolai, Tim`,
+Don’t hesitate to ask me if you get stuck at any point. Feel free to <strong> send me your answers </strong> — you’ll earn more points if you submit them on the same day!
+At the end, the person with the highest score will be rewarded with a delightful surprise. Have fun solving the puzzles and enjoy this wonderful Advent season!</p>`,
         openBtn: "Open the Advent Calendar",
         reload: "Reload",
         greeting: "Your Secret Santas"
@@ -377,7 +373,7 @@ Your Secret Santas, Ines, Nikolai, Tim`,
       pageTitle.textContent = t.title;
       openCalendar.textContent = t.openBtn;
       greetingEl.textContent = t.greeting + ',';
-      storyText.textContent = t.intro;
+      storyText.innerHTML = t.intro;
     }
     applyLang();
 

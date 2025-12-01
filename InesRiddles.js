@@ -1,6 +1,6 @@
 let playerName = localStorage.getItem('playerName') ?? 'Sonja'
 
-const mapRiddle = (lang, orientation) => {
+const mapRiddle = (lang) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
 
@@ -65,7 +65,7 @@ const mapRiddle = (lang, orientation) => {
     return container;
 };
 
-const elvesRiddle = (lang, orientation) => {
+const elvesRiddle = (lang) => {
     const riddleText = "The elves are sitting around a campfire discussing magic, plants, films and tea. They cannot agree on which symbols belong to which categories. Can you help? There are three symbols for each category. Connect them to form a triangle. (You will have four triangles.) Count how many individual lines can be found from other triangles in each triangle. The numbers correspond to letters. Can you find the correct solution word?";
 
     const photoPos = [ // in %
@@ -84,7 +84,7 @@ const elvesRiddle = (lang, orientation) => {
     ];
 };
 
-const matchRiddle = (lang, orientation) => {
+const matchRiddle = (lang) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
     // Removed: if (orientation == 'P'){ container.classList.add('vert') }
@@ -206,7 +206,7 @@ const matchRiddle = (lang, orientation) => {
     return container;
 };
 
-const sudokuRiddle = (lang, orientation) => {
+const sudokuRiddle = (lang) => {
 
     const riddleCont = document.createElement('div');
 
@@ -396,7 +396,7 @@ const sudokuRiddle = (lang, orientation) => {
     return riddleCont;
 };
 
-const wreathRiddle = (lang, orientation) => {
+const wreathRiddle = (lang) => {
     let text;
     if (lang == "EN") {
         text = document.createTextNode(
@@ -425,7 +425,7 @@ const wreathRiddle = (lang, orientation) => {
     return container;
 };
 
-const inequalityRiddle = (lang, orientation) => {
+const inequalityRiddle = (lang) => {
     let text;
     if (lang == "EN") {
         text = document.createTextNode(`The elf ${playerName} has lost their heart to Japan and now enthusiastically solves Japanese puzzles! In each puzzle, they have to enter the numbers 1 to 5 in each row and column – while paying attention to the small "greater than" and "less than" signs. Can you help ${playerName} solve this puzzle and name the numbers in the boxes marked in red?`);
@@ -538,11 +538,15 @@ const inequalityRiddle = (lang, orientation) => {
     return container;
 };
 
-const wordSearchRiddle = (lang, orientation) => {
+const wordSearchRiddle = (lang) => {
 
 }
 
 const riddleLib = [
+    {
+        title: "#74 Wreath Riddle",
+        riddle: wreathRiddle,
+    },
     {
         title: "#82 Sudoku Riddle",
         riddle: sudokuRiddle,
@@ -560,10 +564,7 @@ const riddleLib = [
         riddle: inequalityRiddle,
     },
     
-    {
-        title: "#74 Wreath Riddle",
-        riddle: wreathRiddle,
-    },
+    
     
 
     // {
@@ -584,7 +585,7 @@ const openRiddle = (num, lang) => {
     const riddleBody = document.createElement('div');
     riddleBody.classList.add("riddlebody");
 
-    riddleBody.append(riddleLib[idx].riddle(lang, orientation_));
+    riddleBody.append(riddleLib[idx].riddle(lang));
 
     openModal(header, riddleBody, null, null, true);
 };
