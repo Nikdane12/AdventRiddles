@@ -61,6 +61,15 @@ a:visited {
     grid-template-rows: repeat(3, auto);
 }
 
+.daycont {
+  width: 125px;
+  height: 125px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  grid-template-areas: "inner-div";
+}
+
 @media (min-aspect-ratio: 2/1) {
     #calender {
         grid-template-columns: repeat(8, auto);
@@ -74,6 +83,10 @@ a:visited {
         grid-template-columns: repeat(4, auto);
         grid-template-rows: repeat(6, auto);
     }
+    .daycont{
+      width: 105px;
+      height: 105px;
+    }
 }
 
 /* 4. Tall Portrait (e.g., Phones): 3 columns x 8 rows */
@@ -82,16 +95,13 @@ a:visited {
         grid-template-columns: repeat(3, auto);
         grid-template-rows: repeat(8, auto);
     }
+    .daycont{
+      width: 105px;
+      height: 105px;
+    }
 }
 
-.daycont {
-  width: 125px;
-  height: 125px;
-  border-radius: 10px;
-  display: grid;
-  place-items: center;
-  grid-template-areas: "inner-div";
-}
+
 
 .daycont>* {
   grid-area: inner-div;
@@ -101,16 +111,16 @@ a:visited {
 
 .daybackground {
   position: relative;
-  width: 125px;
-  height: 125px;
+  width: inherit;
+  height: inherit;
   background: radial-gradient(circle, rgb(73, 89, 118) 50%, rgb(62, 62, 62) 95%);
 }
 
 .day {
   cursor: pointer;
   position: relative;
-  width: 125px;
-  height: 125px;
+  width: inherit;
+  height: inherit;
   background-color: green;
   display: flex;
   justify-content: center;
@@ -137,8 +147,8 @@ a:visited {
 .daycont>img {
   cursor: pointer;
   position: relative;
-  width: 125px;
-  height: 125px;
+  width: inherit;
+  height: inherit;
   object-fit: cover;
   opacity: 1;
   transition: 0.75s ease;
