@@ -1,9 +1,17 @@
-const mapRiddle = (lang) => {
+let playerName = localStorage.getItem('playerName') ?? 'Sonja'
+let orientation_
+
+const mapRiddle = (lang, orientation) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
+    if (orientation == 'P'){
+        container.classList.add('vert')
+    }
 
     const riddleTextDiv = document.createElement('div');
-    riddleTextDiv.classList.add('riddleText', 'vert');
+    if (orientation === 'L') {
+    riddleTextDiv.classList.add('vert');
+    }
 
     let riddleText;
     if (lang == "EN") {
@@ -17,8 +25,13 @@ const mapRiddle = (lang) => {
     }
     riddleTextDiv.appendChild(riddleText);
 
-    const rightWrapper = document.createElement('div');
-    rightWrapper.classList.add('riddleRightWrapper');
+    const Wrapper = document.createElement('div');
+    if (orientation === 'L') {
+        Wrapper.classList.add('riddleRightWrapper');
+    } else {
+        Wrapper.classList.add('riddleWrapper');
+    }
+    
 
     const riddleImageCont = document.createElement('div');
     riddleImageCont.classList.add('riddleImageContainer');
@@ -52,18 +65,18 @@ const mapRiddle = (lang) => {
         riddleImageDragCont.appendChild(img);
     });
 
-    rightWrapper.appendChild(riddleImageCont);
-    rightWrapper.appendChild(riddleImageDragCont);
+    Wrapper.appendChild(riddleImageCont);
+    Wrapper.appendChild(riddleImageDragCont);
 
     container.appendChild(riddleTextDiv);
-    container.appendChild(rightWrapper);
+    container.appendChild(Wrapper);
 
     enableCountryDragging(riddleImageDragCont);
 
     return container;
 };
 
-const elvesRiddle = (lang) => {
+const elvesRiddle = (lang, orientation) => {
     const riddleText = "The elves are sitting around a campfire discussing magic, plants, films and tea. They cannot agree on which symbols belong to which categories. Can you help? There are three symbols for each category. Connect them to form a triangle. (You will have four triangles.) Count how many individual lines can be found from other triangles in each triangle. The numbers correspond to letters. Can you find the correct solution word?";
 
     const photoPos = [ // in %
@@ -82,9 +95,12 @@ const elvesRiddle = (lang) => {
     ];
 };
 
-const matchRiddle = (lang) => {
+const matchRiddle = (lang, orientation) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
+    if (orientation == 'P'){
+        container.classList.add('vert')
+    }
 
     let text;
     if (lang == "EN") {
@@ -99,12 +115,21 @@ const matchRiddle = (lang) => {
 
     const textElement = document.createElement('p');
     textElement.appendChild(text)
-    textElement.classList.add('riddleText', 'vert')
+
+    textElement.classList.add('riddleText')
+    if (orientation === 'L') {
+        textElement.classList.add('vert');
+    }
 
     container.appendChild(textElement)
 
-    const rightWrapper = document.createElement('div');
-    rightWrapper.classList.add('riddleRightWrapper');
+    const Wrapper = document.createElement('div');
+    if (orientation === 'L') {
+        Wrapper.classList.add('riddleRightWrapper');
+    } else {
+        Wrapper.classList.add('riddleWrapper');
+    }
+
 
     const riddleImageCont = document.createElement('div');
     riddleImageCont.classList.add('riddleImageContainer');
@@ -188,20 +213,24 @@ const matchRiddle = (lang) => {
         riddleImageDragCont.appendChild(img);
     });
 
-    rightWrapper.appendChild(riddleImageCont);
-    rightWrapper.appendChild(riddleImageDragCont);
+    Wrapper.appendChild(riddleImageCont);
+    Wrapper.appendChild(riddleImageDragCont);
 
-    container.appendChild(rightWrapper);
+    container.appendChild(Wrapper);
 
     enableCountryDragging(riddleImageDragCont);
 
     return container;
 };
 
-const sudokuRiddle = (lang) => {
+const sudokuRiddle = (lang, orientation) => {
 
     const riddleCont = document.createElement('div');
-    riddleCont.classList.add('sudoku-riddle');
+
+    if (orientation == 'L'){
+        riddleCont.classList.add('sudoku-riddle');
+    }
+    
 
     const sudokuleftCont = document.createElement('div')
     sudokuleftCont.classList.add('sudokuLeftCont')
@@ -387,7 +416,7 @@ const sudokuRiddle = (lang) => {
     return riddleCont;
 };
 
-const wreathRiddle = (lang) => {
+const wreathRiddle = (lang, orientation) => {
     let text;
     if (lang == "EN") {
         text = document.createTextNode(
@@ -414,13 +443,14 @@ const wreathRiddle = (lang) => {
     return container;
 };
 
-const inequalityRiddle = (lang) => {
+const inequalityRiddle = (lang, orientation) => {
     let text;
     if (lang == "EN") {
-        text = document.createTextNode(`The elf Sonja has lost her heart to Japan and now enthusiastically solves Japanese puzzles! In each puzzle, she has to enter the numbers 1 to 5 in each row and column - while paying attention to the small "greater than" and "less than" signs. Can you help Sonja solve this puzzle and name the numbers in the boxes marked in red?`);
+        text = document.createTextNode(`The elf ${playerName} has lost their heart to Japan and now enthusiastically solves Japanese puzzles! In each puzzle, they have to enter the numbers 1 to 5 in each row and column – while paying attention to the small "greater than" and "less than" signs. Can you help ${playerName} solve this puzzle and name the numbers in the boxes marked in red?`);
     } else {
-        text = document.createTextNode("Die Elfe Sonja hat ihr Herz an Japan verloren und löst jetzt voller Begeisterung japanische Rätsel!\nIn jedem Rätsel muss sie in jeder Zeile und Spalte die Zahlen von 1 bis 5 eintragen - und dabei die kleinen „größer als“ und „kleiner als“ Zeichen beachten.\nKannst du Sonja helfen dieses Rätsel zu lösen und die Zahlen in den rot markierten Kästchen zu nennen?");
+        text = document.createTextNode(`Die Elfe ${playerName} hat ihr Herz an Japan verloren und löst jetzt voller Begeisterung japanische Rätsel! In jedem Rätsel müssen in jeder Zeile und Spalte die Zahlen von 1 bis 5 eingetragen werden – dabei sind die kleinen „größer als“- und „kleiner als“-Zeichen zu beachten. Kannst du ${playerName} helfen, dieses Rätsel zu lösen und die Zahlen in den rot markierten Kästchen zu nennen?`);
     }
+
     
 
     const grid = [
@@ -448,11 +478,17 @@ const inequalityRiddle = (lang) => {
     ];
 
     const container = document.createElement('div');
-    container.classList.add('ineq-body');
+    container.classList.add('riddleContainer');
+    if(orientation == 'P'){
+        container.classList.add('vert')
+    }
 
     const textElement = document.createElement('p');
     textElement.appendChild(text)
-    textElement.classList.add('riddleText', 'vert')
+    textElement.classList.add('riddleText')
+    if(orientation == 'L'){
+        textElement.classList.add('vert')
+    }
 
     container.appendChild(textElement)
     
@@ -525,38 +561,44 @@ const inequalityRiddle = (lang) => {
     return container;
 };
 
-const wordSearchRiddle = (lang) => {
+const wordSearchRiddle = (lang, orientation) => {
     
 }
 
 const riddleLib = [
     {
-        title: "Map Riddle",
-        riddle: mapRiddle,
-    },
-    // {
-    //     title: "Elves Riddle",
-    //     riddle: elvesRiddle,
-    // },
-    {
-        title: "Match Riddle",
-        riddle: matchRiddle,
+        title: "#59 Inequality Riddle",
+        riddle: inequalityRiddle,
     },
     {
-        title: "Sudoku Riddle",
+        title: "#82 Sudoku Riddle",
         riddle: sudokuRiddle,
     },
     {
-        title: "Wreath Riddle",
+        title: "#65 Match Riddle",
+        riddle: matchRiddle,
+    },
+    {
+        title: "#74 Wreath Riddle",
         riddle: wreathRiddle,
     },
     {
-        title: "Inequality Riddle",
-        riddle: inequalityRiddle,
+        title: "#52 Map Riddle",
+        riddle: mapRiddle,
     },
+    
+    // {
+    //     title: ""29 Elves Riddle",
+    //     riddle: elvesRiddle,
+    // },
+    
+    
+    
+    
 ];
 
 const openRiddle = (num, lang) => {
+    orientation_ = localStorage.getItem('orientation') ?? 'L'
     num = (((num - 1) % riddleLib.length) + riddleLib.length) % riddleLib.length + 1;
     const idx = num - 1;
 
@@ -566,7 +608,7 @@ const openRiddle = (num, lang) => {
     const riddleBody = document.createElement('div');
     riddleBody.classList.add("riddlebody");
 
-    riddleBody.append(riddleLib[idx].riddle(lang));
+    riddleBody.append(riddleLib[idx].riddle(lang, orientation_));
 
     openModal(header, riddleBody, null, null, true);
 };

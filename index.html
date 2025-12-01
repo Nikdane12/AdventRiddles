@@ -9,12 +9,12 @@
     :root {
       --bg1: #0f1724;
       --bg2: #1b2a4a;
-      --accent: #ffcf33;
+      --accent: #9e0000;
       --accent-2: #ff6b6b;
       --card: #ffffffcc;
       --glass: rgba(255, 255, 255, 0.06);
-      --glass-2: rgba(255, 255, 255, 0.04);
-      --text: #e8eefc;
+      --border: rgba(82, 82, 82, 0.24);
+      --text: #363636;
       --shadow: 0 8px 30px rgba(2, 6, 23, 0.6);
       --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
@@ -35,7 +35,7 @@
       font-family: var(--font-sans);
       background-image: url('./images/frontPageBackground.jpg');
       backdrop-filter: blur(2px);
-      background-size: contain;
+      background-size: 100% auto;
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -47,18 +47,18 @@
 
     body::before {
       content: "";
-      position: fixed;              /* covers viewport even when scrolling */
+      position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.55); /* adjust darkness here */
-      z-index: -1;                  /* sits behind all content */
-      pointer-events: none;         /* so it doesn’t block clicks */
+      background: rgba(0, 0, 0, 0.55);
+      z-index: -1;
+      pointer-events: none;
     }
 
     /* Center card */
     .card {
       width: 100%;
       max-width: 1100px;
-      background-color: rgba(255, 255, 255, 0.03);
+      background-color: rgba(255, 255, 255, 0.8);
       border-radius: 18px;
       padding: 28px;
       box-shadow: var(--shadow);
@@ -83,30 +83,10 @@
       align-items: center;
     }
 
-    .reload-btn {
-      background: var(--glass);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      color: var(--text);
-      padding: 8px 10px;
-      border-radius: 10px;
-      cursor: pointer;
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      font-weight: 600;
-    }
-
-    .reload-btn svg {
-      width: 18px;
-      height: 18px;
-      display: block;
-      opacity: 0.95
-    }
-
     .lang-toggle {
       background: transparent;
       color: var(--text);
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
       padding: 8px 10px;
       border-radius: 10px;
       cursor: pointer;
@@ -124,7 +104,6 @@
       font-size: clamp(20px, 3.8vw, 32px);
       letter-spacing: -0.6px;
       color: var(--text);
-      text-shadow: 0 6px 30px rgba(0, 0, 0, 0.6);
     }
 
     p.lead {
@@ -155,7 +134,7 @@
       background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
       border: 2px solid rgba(255, 255, 255, 0.06);
       box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-      color: white;
+      color: var(--text);
       text-decoration: none;
       transition: transform .14s ease, box-shadow .14s ease;
     }
@@ -176,13 +155,13 @@
       padding: 18px;
       border-radius: 12px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
-      border: 1px solid rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
     }
 
     .credits {
       margin-top: 14px;
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.86);
+      color: var(--text);
     }
 
     /* scoreboard on right */
@@ -196,7 +175,7 @@
     .scoreboard h3 {
       margin: 6px 0 12px 0;
       font-size: 16px;
-      color: white
+      color: var(--text);
     }
 
     table.scores {
@@ -222,14 +201,14 @@
       margin-top: 12px;
       display: flex;
       gap: 8px;
-      align-items: center;
+      flex-direction: column;
     }
 
     input[type="text"],
     input[type="number"] {
       padding: 8px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
       background: transparent;
       color: var(--text);
       outline: none;
@@ -246,30 +225,16 @@
       background: var(--glass);
       padding: 8px 10px;
       border-radius: 8px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
       color: var(--text);
       cursor: pointer;
       font-weight: 700;
     }
 
-    .small-btn.warn {
-      background: transparent;
-      color: #ffb3b3;
-      border-color: rgba(255, 107, 107, 0.12)
-    }
-
-    /* snow (decorative) */
-    .snow {
-      pointer-events: none;
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      background-image: radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.03) 0 1px, transparent 1px),
-        radial-gradient(circle at 40% 30%, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 70%, rgba(255, 255, 255, 0.015) 0 1px, transparent 1px);
-      background-size: 100px 100px, 160px 160px, 220px 220px;
-      opacity: 0.8;
-      transform: translateZ(0);
+    .small-btn.conf {
+      background: rgba(122, 255, 107, 0.15);
+      color: #b6ffb3;
+      border-color: rgba(122, 255, 107, 0.3)
     }
 
     /* responsive */
@@ -292,10 +257,10 @@
 </head>
 
 <body>
-  <div class="card" role="main" aria-labelledby="pageTitle">
+  <div class="card">
     <div class="header">
       <div class="left-controls">
-        <button class="lang-toggle" id="langToggle" aria-pressed="false" title="Switch language / Sprache wechseln">EN /
+        <button class="lang-toggle" id="langToggle" title="Switch language / Sprache wechseln">EN /
           DE</button>
       </div>
     </div>
@@ -304,15 +269,14 @@
       <h1 id="pageTitle">Riddle Advent Calendar</h1>
     </div>
 
-    <div class="main-grid" role="region" aria-label="Main content">
-      <section class="story" aria-labelledby="whoTitle">
-        <a class="big-action" id="openCalendar" href="julekalender.html" role="button"
-          aria-label="Open Advent Calendar">
+    <div class="main-grid">
+      <section class="story">
+        <a class="big-action" id="openCalendar" href="julekalender.html" role="button">
           Open the Advent Calendar
         </a>
 
         <div style="margin-top:18px;">
-          <h3 id="whoTitle" style="margin:0 0 6px 0; color:#fff">Welcome</h3>
+          <h3 id="whoTitle" style="margin:0 0 6px 0;">Welcome</h3>
           <div id="storyText">
             <!-- bilingual copy inserted by JS -->
           </div>
@@ -324,10 +288,10 @@
         </div>
       </section>
 
-      <aside class="scoreboard" aria-labelledby="scoreTitle">
+      <div class="scoreboard">
         <h3 id="scoreTitle">Scoreboard</h3>
 
-        <table class="scores" aria-describedby="scoreDesc">
+        <table class="scores">
           <thead>
             <tr>
               <th>#</th>
@@ -338,27 +302,30 @@
           <tbody id="scoreBody">
           </tbody>
         </table>
-
-        <div class="controls" style="margin-top:8px;">
-          <div style="flex:1">
-            <label style="font-size:12px;opacity:0.8">Name</label>
-            <input type="text" id="playerName"/>
-          </div>
-        </div>
-
         <p id="scoreDesc" style="margin-top:8px; font-size:12px; opacity:0.8">
           Submit answers to get points. Get more points when answering on the day of.
         </p>
-      </aside>
+
+        <div class="controls" style="margin-top:32px;">
+          <label style="font-size:12px;opacity:0.8;font-weight:700;">Enter your name for custom names in the
+            riddles</label>
+          <div style="display: flex; width: 100%;">
+            <input type="text" id="playerName" placeholder="Name" />
+            <div class="small-btn" id="nameEnter">Enter</div>
+
+          </div>
+        </div>
+
+
+      </div>
     </div>
 
-    <div class="snow" aria-hidden="true"></div>
   </div>
   <script src="./scores.js"></script>
   <script>
     // bilingual texts (exact texts from user)
     const texts = {
-      de: {
+      DE: {
         title: "Rätsel Adventskalender",
         intro: `Es ist wieder soweit – die Weihnachtszeit steht vor der Tür! Unser Adventskalender erstrahlt in voller Pracht und wartet darauf, von euch geöffnet zu werden.
 Jeden Tag erwarten euch spannende Aufgaben und Rätsel. Oben links könnt ihr die Webseite neu laden, um das Tagesrätsel in seiner originalen Form zu sehen. Du kannst den Adventskalender auch in Englisch haben.
@@ -370,7 +337,7 @@ Eure Wichtel Ines, Nikolai, Tim`,
         reload: "Neu laden",
         greeting: "Eure Wichtel"
       },
-      en: {
+      EN: {
         title: "Riddle Advent Calendar",
         intro: `The festive season is upon us! Our Advent calendar is shining bright and ready to be opened by you.
 Every day brings exciting challenges and puzzles. You can refresh the webpage at the top left corner to see the daily puzzle in its original form. You can also change the language to English or German.
@@ -385,7 +352,18 @@ Your Secret Santas, Ines, Nikolai, Tim`,
     };
 
     // initial language
-    let lang = localStorage.getItem('advent_lang') || 'en';
+    let currentlang = localStorage.getItem('kalanderlangstatus') ?? 'EN'
+    localStorage.setItem('kalanderlangstatus', currentlang)
+
+    const toggleLang = () => {
+      if (currentlang == "EN") {
+        currentlang = "DE"
+      } else {
+        currentlang = "EN"
+      }
+      localStorage.setItem('kalanderlangstatus', currentlang)
+    }
+
     const pageTitle = document.getElementById('pageTitle');
     const openCalendar = document.getElementById('openCalendar');
     const langToggle = document.getElementById('langToggle');
@@ -395,29 +373,24 @@ Your Secret Santas, Ines, Nikolai, Tim`,
 
 
     const applyLang = () => {
-      const t = texts[lang];
+      const t = texts[currentlang];
       pageTitle.textContent = t.title;
       openCalendar.textContent = t.openBtn;
       greetingEl.textContent = t.greeting + ',';
-      langToggle.setAttribute('aria-pressed', lang === 'de' ? 'true' : 'false');
-      // story area gets same as intro for convenience
       storyText.textContent = t.intro;
-      localStorage.setItem('advent_lang', lang);
     }
     applyLang();
 
     langToggle.addEventListener('click', () => {
-      lang = (lang === 'en') ? 'de' : 'en';
+      toggleLang();
       applyLang();
     });
 
 
-    // Scoreboard data + UI
     const scoreKey = 'advent_scoreboard_v1';
 
     const renderScores = () => {
       const list = scores;
-      // sort descending by points
       list.sort((a, b) => b.points - a.points);
       const tbody = document.getElementById('scoreBody');
       tbody.innerHTML = '';
@@ -434,15 +407,22 @@ Your Secret Santas, Ines, Nikolai, Tim`,
       });
     }
 
-    // init
     renderScores();
 
-    // Accessibility: open calendar with Enter on big-action
     openCalendar.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' || e.key === ' ') { openCalendar.click(); e.preventDefault(); }
     });
 
-    // optional: link to real calendar page is calendar.html — update href if needed
+    
+    const nameInput = document.getElementById('playerName')
+    const enterDiv = document.getElementById('nameEnter')
+    const collectName = () => {
+      if (nameInput.value) {
+        localStorage.setItem('playerName', nameInput.value);
+      }
+    }
+
+    enterDiv.addEventListener('click', collectName)
   </script>
 </body>
 

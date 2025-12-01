@@ -5,17 +5,18 @@ let day
 let lockbutton
 let unlockstatus
 let currentdate = new Date()
-let currentlang = "EN"
+let currentlang
 
 const startup = () => {
-    lockbutton = document.getElementById('unlock')
-    unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
-    if (unlockstatus == 'unlock') {
-        lockbutton.innerHTML = `🔓`
-    }
-    else {
-        lockbutton.innerHTML = `🔒`
-    }
+    // lockbutton = document.getElementById('unlock')
+    unlockstatus = 'lock'
+    // unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
+    // if (unlockstatus == 'unlock') {
+    //     lockbutton.innerHTML = `🔓`
+    // }
+    // else {
+    //     lockbutton.innerHTML = `🔒`
+    // }
     daysarray = JSON.parse(localStorage.getItem('daysarray')) ?? []
 
     if (daysarray.length < 1) { createDays() }
@@ -38,11 +39,18 @@ const startup = () => {
         <img class="treat ${takeTreat} ${display}" src="./${day.treat}.png" onclick="eatTreat(${day.day})"/>
         <div class="day ${myanim}" onclick="openDoor(${day.day})"><p class="noSelect">${day.day}</p></div>`
         calender.appendChild(daycont)
-    }
+    }    
+    currentlang = localStorage.getItem('kalanderlangstatus') ?? 'EN'
+    localStorage.setItem('kalanderlangstatus', currentlang)
 
-    langbutton = document.getElementById('lang')
-    langstatus = localStorage.getItem('kalanderlangstatus') ?? 'EN'
-    setLang(langstatus)
+    const mainTitle = document.getElementById('mainTitle')
+    let mainTitleText
+    if(currentlang == 'EN'){
+        mainTitleText = "Advent calendar";
+    } else {
+        mainTitleText = "Adventskalender";
+    }
+    mainTitle.innerText = mainTitleText
 }
 
 const createDays = () => {
@@ -65,8 +73,8 @@ const createDays = () => {
 
 const saveLocalStorage = () => {
     localStorage.setItem('daysarray', JSON.stringify(daysarray))
-    localStorage.setItem('kalanderlockstatus', unlockstatus)
-    localStorage.setItem('kalanderlangstatus', currentlang)
+    // localStorage.setItem('kalanderlockstatus', unlockstatus)
+    // localStorage.setItem('kalanderlangstatus', currentlang)
 }
 
 const getRandomDirection = () => {
@@ -101,16 +109,16 @@ const eatTreat = (day) => {
     saveLocalStorage()
 }
 
-const unlock = () => {
-    unlockstatus = unlockstatus == 'unlock' ? 'lock' : 'unlock'
-    if (unlockstatus == 'unlock') {
-        lockbutton.innerHTML = `🔓`
-    }
-    else {
-        lockbutton.innerHTML = `🔒`
-    }
-    saveLocalStorage()
-}
+// const unlock = () => {
+//     unlockstatus = unlockstatus == 'unlock' ? 'lock' : 'unlock'
+//     if (unlockstatus == 'unlock') {
+//         lockbutton.innerHTML = `🔓`
+//     }
+//     else {
+//         lockbutton.innerHTML = `🔒`
+//     }
+//     saveLocalStorage()
+// }
 
 const openDoor = (day) => {
     if (unlockstatus == 'lock') {
@@ -170,8 +178,10 @@ const mainTextDE = "Adventskalender"
 const mainTextEN = "Advent calendar"
 
 const setLang = (lang) => {
-const mainTitle = document.getElementById('mainTitle')
-let mainTitleText
+    console.log(lang);
+    
+    const mainTitle = document.getElementById('mainTitle')
+    let mainTitleText
     switch (lang) {
         case "EN":
             currentlang = "EN"
@@ -202,7 +212,7 @@ const toggleLang = () => {
 
 window.startup = startup;
 window.clearAdvents = clearAdvents;
-window.unlock = unlock;
+// window.unlock = unlock;
 window.openDoor = openDoor;
 window.eatTreat = eatTreat;
 window.toggleLang = toggleLang;
@@ -214,7 +224,7 @@ window.addEventListener('keydown', function(event) {
 })
 
 const changeGridOri = () => {
-    if(window.innerWidth > window.innerHeight){calender.className = '';calender.classList.add("land")}
-    else{calender.className = '';calender.classList.add("port")}
+    if(window.innerWidth > window.innerHeight){calender.className = '';calender.classList.add("land"); localStorage.setItem('orientation', 'L')}
+    else{calender.className = '';calender.classList.add("port"); localStorage.setItem('orientation', 'P')}
 }
 window.addEventListener('resize', changeGridOri);
