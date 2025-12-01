@@ -428,9 +428,9 @@ const wreathRiddle = (lang) => {
 const inequalityRiddle = (lang) => {
     let text;
     if (lang == "EN") {
-        text = document.createTextNode(`The elf ${playerName} has lost their heart to Japan and now enthusiastically solves Japanese puzzles! In each puzzle, they have to enter the numbers 1 to 5 in each row and column – while paying attention to the small "greater than" and "less than" signs. Can you help ${playerName} solve this puzzle and name the numbers in the boxes marked in red?`);
+        text = document.createTextNode(`The elf ${playerName} has lost their heart to Japan and now enthusiastically solves Japanese puzzles! In each puzzle, they have to enter the numbers 1 to 5 in each row and column – while paying attention to the small "greater than" and "less than" signs. Can you help ${playerName} solve this puzzle and name the numbers in the boxes marked in red? \nYou can fill in the empty boxes by typing your answer in them.`);
     } else {
-        text = document.createTextNode(`Die Elfe ${playerName} hat ihr Herz an Japan verloren und löst jetzt voller Begeisterung japanische Rätsel! In jedem Rätsel müssen in jeder Zeile und Spalte die Zahlen von 1 bis 5 eingetragen werden – dabei sind die kleinen „größer als“- und „kleiner als“-Zeichen zu beachten. Kannst du ${playerName} helfen, dieses Rätsel zu lösen und die Zahlen in den rot markierten Kästchen zu nennen?`);
+        text = document.createTextNode(`Die Elfe ${playerName} hat ihr Herz an Japan verloren und löst jetzt voller Begeisterung japanische Rätsel! In jedem Rätsel müssen in jeder Zeile und Spalte die Zahlen von 1 bis 5 eingetragen werden – dabei sind die kleinen „größer als“- und „kleiner als“-Zeichen zu beachten. Kannst du ${playerName} helfen, dieses Rätsel zu lösen und die Zahlen in den rot markierten Kästchen zu nennen? \nSie können die leeren Felder ausfüllen, indem Sie Ihre Antwort hineintippen.`);
     }
 
 
@@ -441,6 +441,12 @@ const inequalityRiddle = (lang) => {
         [0, 0, 0, 0, 2],
         [0, 4, 2, 0, 1],
     ];
+
+    const red = [
+        {x: 1, y: 1}, 
+        {x: 4, y: 3}, 
+        {x: 1, y: 4}
+    ]
 
     const ineq = [
         /*Horizontal*/[
@@ -488,8 +494,12 @@ const inequalityRiddle = (lang) => {
             if (number !== 0) {
                 input.value = number;
                 input.readOnly = true;
-                input.classList.add('lock')
             }
+            red.forEach(obj => {
+                if(obj.y == valueIndex && obj.x == rowIndex){
+                    input.classList.add('find')
+                }
+            });
 
             cell.appendChild(input);
             rowDiv.appendChild(cell);
@@ -503,9 +513,9 @@ const inequalityRiddle = (lang) => {
                 sign.classList.add('ineq-sign', 'ineq-sign--horizontal');
 
                 if (val !== 0) {
-                    sign.innerText = val;
+                    sign.innerText = val;                    
                 }
-
+                
                 rowDiv.appendChild(sign);
             }
         });
@@ -525,8 +535,8 @@ const inequalityRiddle = (lang) => {
                 if(e == 'A'){
                     sign.classList.add('flip')
                     e = 'V'
-                }
-                sign.innerText = e;
+                } 
+                if (e !== 0) {sign.innerText = e;}
                 cell.appendChild(sign)
                 subRow.appendChild(cell)
             });

@@ -320,7 +320,7 @@
   appearance: textfield;
 }
 
-.ineq-input.lock {
+.ineq-input.find {
     border: 2px solid red;
     pointer-events: none;
 }
