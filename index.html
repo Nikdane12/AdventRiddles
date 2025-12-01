@@ -181,7 +181,7 @@
     table.scores th,
     table.scores td {
       text-align: left;
-      padding: 8px 6px;
+      padding: 4px 6px;
       border-bottom: 1px dashed rgba(255, 255, 255, 0.03);
       color: var(--text);
     }
@@ -405,6 +405,7 @@ At the end, the person with the highest score will be rewarded with a delightful
 
     
     const nameInput = document.getElementById('playerName')
+    nameInput.value = localStorage.getItem('playerName') ?? '';
     const enterDiv = document.getElementById('nameEnter')
     const collectName = () => {
       if (nameInput.value) {
@@ -418,6 +419,3 @@ At the end, the person with the highest score will be rewarded with a delightful
 </body>
 
 </html>
-
-
-<!-- i idiotically baked the orientation check into the js and set each individual element class based on ori, but i realize i should have just used css @media. Can you go in and change all of the js code that deals with the orientation and set it with CSS. -->

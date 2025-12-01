@@ -116,6 +116,28 @@ a:visited {
   background: radial-gradient(circle, rgb(73, 89, 118) 50%, rgb(62, 62, 62) 95%);
 }
 
+.daybackground::after {
+  content: "↺";
+  position: absolute;
+  right: 47.5px;
+  bottom: 47.5px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+}
+
 .day {
   cursor: pointer;
   position: relative;
