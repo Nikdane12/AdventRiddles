@@ -48,28 +48,40 @@ a:visited {
 }
 
 #calender {
-  position: relative;
-  width: 80%;
-  height: 80%;
-  left: calc(50% - 40%);
-  /* display: flex;
-  gap: 20px; */
-  display: grid;
-  /* grid-template-columns: auto auto auto auto auto auto auto auto;
-  grid-template-rows: auto auto auto; */
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    position: relative;
+    width: 80%;
+    height: 80%;
+    left: calc(50% - 40%);
+    display: grid;
+    align-items: center;
+    justify-content: space-between;
+    
+    /* Default Layout (Landscape): 8 columns, 3 rows */
+    grid-template-columns: repeat(8, auto);
+    grid-template-rows: repeat(3, auto);
 }
 
-
-#calender.land {
-  grid-template-columns: auto auto auto auto auto auto auto auto;
-  grid-template-rows: auto auto auto;
+@media (min-aspect-ratio: 2/1) {
+    #calender {
+        grid-template-columns: repeat(8, auto);
+        grid-template-rows: repeat(3, auto);
+    }
 }
-#calender.port{
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto auto auto auto auto auto;
+
+/* 3. Portrait (e.g., Tablets): 4 columns x 6 rows */
+@media (orientation: portrait) {
+    #calender {
+        grid-template-columns: repeat(4, auto);
+        grid-template-rows: repeat(6, auto);
+    }
+}
+
+/* 4. Tall Portrait (e.g., Phones): 3 columns x 8 rows */
+@media (max-aspect-ratio: 1/2) {
+    #calender {
+        grid-template-columns: repeat(3, auto);
+        grid-template-rows: repeat(8, auto);
+    }
 }
 
 .daycont {

@@ -1,17 +1,11 @@
 let playerName = localStorage.getItem('playerName') ?? 'Sonja'
-let orientation_
 
 const mapRiddle = (lang, orientation) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
-    if (orientation == 'P'){
-        container.classList.add('vert')
-    }
 
     const riddleTextDiv = document.createElement('div');
-    if (orientation === 'L') {
-    riddleTextDiv.classList.add('vert');
-    }
+    riddleTextDiv.classList.add('riddleText');
 
     let riddleText;
     if (lang == "EN") {
@@ -26,12 +20,8 @@ const mapRiddle = (lang, orientation) => {
     riddleTextDiv.appendChild(riddleText);
 
     const Wrapper = document.createElement('div');
-    if (orientation === 'L') {
-        Wrapper.classList.add('riddleRightWrapper');
-    } else {
-        Wrapper.classList.add('riddleWrapper');
-    }
     
+    Wrapper.classList.add('riddleRightWrapper'); 
 
     const riddleImageCont = document.createElement('div');
     riddleImageCont.classList.add('riddleImageContainer');
@@ -57,7 +47,6 @@ const mapRiddle = (lang, orientation) => {
         img.src = c.src;
         img.classList.add('map-piece', 'draggable-piece');
 
-        // puzzle-specific data (position / scale) stays in JS
         img.style.left = c.left;
         img.style.top = c.top;
         img.style.transform = `scale(${c.scale})`;
@@ -98,9 +87,7 @@ const elvesRiddle = (lang, orientation) => {
 const matchRiddle = (lang, orientation) => {
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
-    if (orientation == 'P'){
-        container.classList.add('vert')
-    }
+    // Removed: if (orientation == 'P'){ container.classList.add('vert') }
 
     let text;
     if (lang == "EN") {
@@ -117,18 +104,14 @@ const matchRiddle = (lang, orientation) => {
     textElement.appendChild(text)
 
     textElement.classList.add('riddleText')
-    if (orientation === 'L') {
-        textElement.classList.add('vert');
-    }
+    // Removed: if (orientation === 'L') { textElement.classList.add('vert'); }
 
     container.appendChild(textElement)
 
     const Wrapper = document.createElement('div');
-    if (orientation === 'L') {
-        Wrapper.classList.add('riddleRightWrapper');
-    } else {
-        Wrapper.classList.add('riddleWrapper');
-    }
+    // The match riddle uses the simple riddleWrapper class for its image side
+    Wrapper.classList.add('riddleWrapper');
+    // Removed orientation check for wrapper class
 
 
     const riddleImageCont = document.createElement('div');
@@ -203,7 +186,7 @@ const matchRiddle = (lang, orientation) => {
         const img = document.createElement('img');
         img.src = './images/matchRiddle/match.png';
         img.classList.add('map-piece', 'match-piece', 'draggable-piece');
-        img.classList.add(index); // keeping this in case other code relies on it
+        img.classList.add(index);
 
         // puzzle positions & rotation
         img.style.left = c.left;
@@ -227,15 +210,13 @@ const sudokuRiddle = (lang, orientation) => {
 
     const riddleCont = document.createElement('div');
 
-    if (orientation == 'L'){
-        riddleCont.classList.add('sudoku-riddle');
-    }
-    
+    riddleCont.classList.add('sudoku-riddle');
+
 
     const sudokuleftCont = document.createElement('div')
     sudokuleftCont.classList.add('sudokuLeftCont')
     riddleCont.appendChild(sudokuleftCont)
-    
+
     let text;
     if (lang == "EN") {
         text = document.createTextNode(
@@ -249,7 +230,6 @@ const sudokuRiddle = (lang, orientation) => {
     const textElement = document.createElement('p');
     textElement.appendChild(text)
     textElement.style.margin = 'unset'
-    // textElement.classList.add('riddleText', 'vert')
 
     sudokuleftCont.appendChild(textElement);
 
@@ -297,7 +277,7 @@ const sudokuRiddle = (lang, orientation) => {
         return img;
     };
 
-    let selectedValue = null; // null = nothing, 0 = clear, 1–9 = symbol
+    let selectedValue = null;
     let lastSelectedBtn = null;
 
     const toolbar = document.createElement('div');
@@ -429,6 +409,8 @@ const wreathRiddle = (lang, orientation) => {
     }
     const textElement = document.createElement('p');
     textElement.appendChild(text)
+    // This riddle uses a different text layout (100% width, 50% height, then image below), 
+    // so we keep the .hori class which CSS will handle.
     textElement.classList.add('riddleText', 'hori')
 
     const image = document.createElement('img');
@@ -451,7 +433,6 @@ const inequalityRiddle = (lang, orientation) => {
         text = document.createTextNode(`Die Elfe ${playerName} hat ihr Herz an Japan verloren und löst jetzt voller Begeisterung japanische Rätsel! In jedem Rätsel müssen in jeder Zeile und Spalte die Zahlen von 1 bis 5 eingetragen werden – dabei sind die kleinen „größer als“- und „kleiner als“-Zeichen zu beachten. Kannst du ${playerName} helfen, dieses Rätsel zu lösen und die Zahlen in den rot markierten Kästchen zu nennen?`);
     }
 
-    
 
     const grid = [
         [0, 0, 0, 3, 0],
@@ -479,19 +460,15 @@ const inequalityRiddle = (lang, orientation) => {
 
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
-    if(orientation == 'P'){
-        container.classList.add('vert')
-    }
+    // Removed: if(orientation == 'P'){ container.classList.add('vert') }
 
     const textElement = document.createElement('p');
     textElement.appendChild(text)
     textElement.classList.add('riddleText')
-    if(orientation == 'L'){
-        textElement.classList.add('vert')
-    }
+    // Removed: if(orientation == 'L'){ textElement.classList.add('vert') }
 
     container.appendChild(textElement)
-    
+
     const gridDiv = document.createElement('div')
     gridDiv.classList.add('ineq-container')
     container.appendChild(gridDiv)
@@ -562,14 +539,10 @@ const inequalityRiddle = (lang, orientation) => {
 };
 
 const wordSearchRiddle = (lang, orientation) => {
-    
+
 }
 
 const riddleLib = [
-    {
-        title: "#59 Inequality Riddle",
-        riddle: inequalityRiddle,
-    },
     {
         title: "#82 Sudoku Riddle",
         riddle: sudokuRiddle,
@@ -579,26 +552,29 @@ const riddleLib = [
         riddle: matchRiddle,
     },
     {
-        title: "#74 Wreath Riddle",
-        riddle: wreathRiddle,
-    },
-    {
         title: "#52 Map Riddle",
         riddle: mapRiddle,
     },
+    {
+        title: "#59 Inequality Riddle",
+        riddle: inequalityRiddle,
+    },
     
+    {
+        title: "#74 Wreath Riddle",
+        riddle: wreathRiddle,
+    },
+    
+
     // {
     //     title: ""29 Elves Riddle",
     //     riddle: elvesRiddle,
     // },
-    
-    
-    
-    
+
+
 ];
 
-const openRiddle = (num, lang) => {
-    orientation_ = localStorage.getItem('orientation') ?? 'L'
+const openRiddle = (num, lang) => {    
     num = (((num - 1) % riddleLib.length) + riddleLib.length) % riddleLib.length + 1;
     const idx = num - 1;
 

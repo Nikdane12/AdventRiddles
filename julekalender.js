@@ -21,7 +21,6 @@ const startup = () => {
 
     if (daysarray.length < 1) { createDays() }
     calender = document.getElementById('calender')
-    changeGridOri()
 
     for (var i = 0; i < 24; ++i) {
         const day = daysarray.find(x => x.position == i)
@@ -222,9 +221,3 @@ window.addEventListener('keydown', function(event) {
     window.print();
   }
 })
-
-const changeGridOri = () => {
-    if(window.innerWidth > window.innerHeight){calender.className = '';calender.classList.add("land"); localStorage.setItem('orientation', 'L')}
-    else{calender.className = '';calender.classList.add("port"); localStorage.setItem('orientation', 'P')}
-}
-window.addEventListener('resize', changeGridOri);

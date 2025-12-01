@@ -8,9 +8,7 @@
     justify-content: space-between;
 }
 
-.riddleContainer.vert{
-    flex-direction: column;
-}
+/* Default (Landscape) layout: Text (50%) on left, Image (50%) on right */
 
 .riddleText {
     box-sizing: border-box;
@@ -20,16 +18,9 @@
     align-items: center;
     justify-content: center;
     white-space: pre-line;
-}
-
-.riddleText.vert {
+    /* Styles for Landscape (Horiz split) */
     width: 50%;
     height: 100%;
-}
-
-.riddleText.hori {
-    width: 100%;
-    height: 50%;
 }
 
 .riddleRightWrapper {
@@ -45,7 +36,43 @@
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
+    /* For match and map riddles, the wrapper also takes 50% in landscape */
+    width: 50%;
 }
+
+
+/* --- PORTRAIT / VERTICAL STYLING (Applied via @media) --- */
+
+@media (orientation: portrait) {
+    .riddleContainer {
+        flex-direction: column;
+    }
+
+    .riddleText {
+        /* Styles for Portrait (Vert split: Text on top, Image on bottom) */
+        width: 100%;
+        height: 50%;
+    }
+
+    /* Note: .riddleText.hori is still used for Wreath riddle, but .vert styles are removed */
+
+    .riddleRightWrapper,
+    .riddleWrapper {
+        width: 100%;
+        height: 50%;
+    }
+}
+
+
+/* The original .riddleText.hori class for Wreath riddle (which is hardcoded in JS) */
+.riddleText.hori {
+    width: 100%;
+    height: 50%;
+    /* Override for Wreath (which is centered vertical content) */
+    display: block; /* Remove flex centering for this specific case */
+}
+
+/* === Draggable/Image Containers (unaffected by orientation for now) === */
 
 .riddleImageContainer {
     width: 100%;
@@ -94,6 +121,7 @@
 
 /* === Sudoku riddle === */
 
+/* Default (Landscape) layout: Grid on right, Text/Toolbar on left */
 .sudoku-riddle {
     display: flex;
     gap: 1.5rem;
@@ -105,6 +133,14 @@
     justify-content: center;
     gap: 20px;
 }
+
+/* Portrait Sudoku - Stacked layout */
+@media (orientation: portrait) {
+    .sudoku-riddle {
+        flex-direction: column;
+    }
+}
+
 
 /* toolbar */
 
