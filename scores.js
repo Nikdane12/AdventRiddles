@@ -4,7 +4,7 @@ const scores = [
     { name: "Lars", points: 8 },
     { name: "Marte", points: 9 },
     { name: "Linn", points: 7 },
-    { name: "Margot", points: 100 },
+    { name: "Margot", points: 4 },
     { name: "Silvia", points: 9 },
     { name: "Finn", points: 9 },
     { name: "Matt", points: 6 },
