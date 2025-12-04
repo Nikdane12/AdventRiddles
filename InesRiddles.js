@@ -409,8 +409,6 @@ const wreathRiddle = (lang) => {
     }
     const textElement = document.createElement('p');
     textElement.appendChild(text)
-    // This riddle uses a different text layout (100% width, 50% height, then image below), 
-    // so we keep the .hori class which CSS will handle.
     textElement.classList.add('riddleText', 'hori')
 
     const image = document.createElement('img');
@@ -552,6 +550,30 @@ const wordSearchRiddle = (lang) => {
 
 }
 
+const earthRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(`After Christmas, it's time for a holiday for all the little helpers. Can you help them figure out where to go?`);
+    } else {
+        text = document.createTextNode(`Nach Weihanchten steht erst mal Urlaub an für die ganzen kleinen Helferlein. Kannst du ihnen helfen herauszufinden, wohin es gehen soll?`);
+    } 
+
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+
+    const image = document.createElement('img');
+    image.src = `./images/earthRiddle/image.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -568,6 +590,10 @@ const riddleLib = [
     {
         title: "#52 Map Riddle",
         riddle: mapRiddle,
+    },
+    {
+        title: "#12 Earth Riddle",
+        riddle: earthRiddle,
     },
     {
         title: "#59 Inequality Riddle",

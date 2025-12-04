@@ -1,6 +1,6 @@
 const scores = [
-    { name: "Sonja", points: 9 },
     { name: "Anette", points: 9 },
+    { name: "Sonja", points: 9 },
     { name: "Lars", points: 8 },
     { name: "Marte", points: 9 },
     { name: "Linn", points: 7 },
