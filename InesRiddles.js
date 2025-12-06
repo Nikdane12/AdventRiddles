@@ -464,12 +464,10 @@ const inequalityRiddle = (lang) => {
 
     const container = document.createElement('div');
     container.classList.add('riddleContainer');
-    // Removed: if(orientation == 'P'){ container.classList.add('vert') }
 
     const textElement = document.createElement('p');
     textElement.appendChild(text)
     textElement.classList.add('riddleText')
-    // Removed: if(orientation == 'L'){ textElement.classList.add('vert') }
 
     container.appendChild(textElement)
 
@@ -574,6 +572,226 @@ const earthRiddle = (lang) => {
     return container;
 }
 
+const nikolausRiddle = (lang) => {
+    const superWrapper = document.createElement('div')
+    const wrapper = document.createElement('div')
+
+    let text
+    if (lang == "EN") {
+        text = document.createTextNode(`Solve each riddle carefully. Every answer will give you a part of a secret code. When you've solved them all, put the final code into the box below.`);
+    } else {
+        text = document.createTextNode(`Löse jedes Rätsel sorgfältig. Jede Antwort gibt dir einen Teil eines geheimen Codes. Wenn du alle gelöst hast, gib den endgültigen Code in das Feld unten ein.`);
+    }
+
+    const textElement = document.createElement('div')
+    textElement.classList.add('riddleText', 'hori')
+    textElement.appendChild(text)
+    
+    wrapper.appendChild(textElement)
+    const subWrapper = document.createElement('div')
+    const openSubRiddle1 = () => {
+        superWrapper.appendChild(subWrapper)
+        wrapper.style.display = "none";
+
+        const backButton = document.createElement('div')
+        backButton.style.position = 'relative'
+        backButton.style.left = '0';
+        backButton.style.width = 'max-content'
+        backButton.style.marginBottom = '10px'
+        backButton.appendChild(document.createTextNode(lang === 'DE' ? '< Zurück' : '< Back'));        
+        backButton.classList.add('small-btn')
+
+        backButton.addEventListener('click', (event) => {
+            closeSubRiddle()
+        });
+
+        subWrapper.appendChild(backButton)
+
+        let subText
+        if (lang == "EN") {
+            subText = document.createTextNode(`The elf ${playerName} is absolutely fascinated by stars. Sometimes the elf sits outside and forgets to work because of all the sparkle. On this St. Nicholas Day evening, the elf notices that the constellation Cassiopeia has disappeared. ${playerName} has to put the stars back in their right position and you will then see a 5-digitnumber combination. The elf has to find the smallest number needed to put this number combination in the correctorder 1,2,3,4,5.`);
+        } else {
+            subText = document.createTextNode(`Der Wichtel ${playerName} Ist absolut begeistert von Sternen. Manchmal sitzt dieser draußen und vergisst das Arbeiten vor lauter Glanz. An diesem Nikolaus Abend bemerkt dieser, dass das Sternbild Kassiopeia verschwunden ist. Der Wichtel muss die Sterne in die richtige Position bringen und man sieht dann eine 5 stellige Zahlenkombination. Der Wichtel muss die kleinsteAnzahl finden, die man braucht diese Zahlenkobination in die richtige Reihenfolge zu bringen 1,2,3,4,5.`);
+        }
+
+        subWrapper.appendChild(subText)
+        const image = document.createElement('img')
+        image.src = './images/nikolausRiddle/image.png'
+        image.classList.add('wreath-image');
+        image.style.width = '50%'
+
+        subWrapper.appendChild(image)
+    }
+
+    const openSubRiddle2 = () => {
+        superWrapper.appendChild(subWrapper)
+        wrapper.style.display = "none";
+
+        const backButton = document.createElement('div')
+        backButton.style.position = 'relative'
+        backButton.style.left = '0';
+        backButton.style.width = 'max-content'
+        backButton.style.marginBottom = '10px'        
+        backButton.appendChild(document.createTextNode(lang === 'DE' ? '< Zurück' : '< Back'));        
+        backButton.classList.add('small-btn')
+
+        backButton.addEventListener('click', (event) => {
+            closeSubRiddle()
+        });
+
+        subWrapper.appendChild(backButton)
+
+        let subText
+        if (lang == "EN") {
+            subText = document.createTextNode(`The elf ${playerName} likes to write some uplifting stories. ${playerName} wrote the following story, but for some reason ${playerName} wants to know how many m's can be found in the story. If there are more than 10 m's, it could become a good story, but if there are more than 30 m, it is mmmmm......`);
+        } else {
+            subText = document.createTextNode(`Der Wichtel ${playerName} schreibt gerne aufmunternde Geschichten. ${playerName} hat die folgende Geschichte geschrieben, aber aus irgendeinem Grund möchte ${playerName} wissen, wie viele m‘s man in der Geschichte finden kann. Bei mehr als 10 m‘s könnte es eine gute Geschichte werden, aber bei mehr als 30 m naja dann ist es eher mmmmm……..`);
+        }
+
+        subWrapper.appendChild(subText)
+
+        const subsubText = document.createElement('div')
+        subsubText.classList.add('riddleRightWrapper')
+        subsubText.style.width = '40%'
+        if (lang == "EN") {
+            subsubText.appendChild(document.createTextNode('Nikolaus Day is full of joyful and magical moments! Imagine a man in a big red coat trying to sneak around quietly - but he always ends up tripping over shoes or dropping mandarins and M&M everywhere. Kids leave out their shoes and sometimes when the kids were well- behaved the Nikolaus fills them! Sometimes the kids are clever, and they will use the shoes of their parents. So, there is more to fill . The excitement in the morning make this tradition a magical part of the holiday season.'))
+        } else {
+            subsubText.appendChild(document.createTextNode('Nikolaus hat’s nicht leicht: Mit seinem großen Sack voller Mandarinen, Nüsse und Schokolade muss er durch den kalten Dezember marschieren. Manchmal verirrt er sich sogar und landet im Wohnzimmer statt vor der Tür! Die Kinder lachen, wenn der Nikolaus dann mit roten Backen und einem mürrischen „Hohoho“ versucht, die Geschenke zu verteilen. Aber am Ende freut sich jeder – sogar der Nikolaus, der sich heimlich ein paar Mandarinen mopsen darf.'))
+        }
+
+        const imagewrapper = document.createElement('div')
+        imagewrapper.style.display = 'flex'
+        imagewrapper.style.justifyContent = 'space-around'
+        imagewrapper.style.marginTop = '30px'
+        imagewrapper.appendChild(subsubText)
+
+        subWrapper.appendChild(imagewrapper)
+
+        const temp = document.createElement('div')
+        temp.classList.add('riddleRightWrapper')
+        temp.style.display = 'flex'
+        temp.style.flexDirection = 'column'
+        temp.style.justifyContent = 'center'
+        temp.style.width = '30%'
+
+        const image = document.createElement('img')
+        image.src = './images/nikolausRiddle/mandarin.png'
+        temp.appendChild(image)
+
+        const image2 = document.createElement('img')
+        image2.src = './images/nikolausRiddle/nikolaus.png'
+        temp.appendChild(image2)
+
+        imagewrapper.appendChild(temp)
+    }
+
+    const closeSubRiddle = () => {
+        removeAll(subWrapper)
+        wrapper.style.display = "block";
+    }
+
+    const subRiddle1BUT = document.createElement('div')
+    subRiddle1BUT.appendChild(document.createTextNode('1'))
+    subRiddle1BUT.classList.add('nikolaus-button')
+
+    subRiddle1BUT.addEventListener('click', (event) => {
+        openSubRiddle1()
+    });
+    
+
+    const subRiddle2BUT = document.createElement('div')
+    subRiddle2BUT.appendChild(document.createTextNode('2'))
+    subRiddle2BUT.classList.add('nikolaus-button')
+
+    subRiddle2BUT.addEventListener('click', (event) => {
+        openSubRiddle2()
+    });
+
+    const buttonWrapper = document.createElement('div')
+    buttonWrapper.style.display = 'flex'
+    buttonWrapper.style.width = '100%'
+    buttonWrapper.style.justifyContent = 'center'
+    buttonWrapper.style.gap = '20px'
+    buttonWrapper.style.marginBottom = '20px'
+
+    buttonWrapper.appendChild(subRiddle1BUT)
+    buttonWrapper.appendChild(subRiddle2BUT)
+    wrapper.appendChild(buttonWrapper)
+
+
+    const codeCont = document.createElement('div')
+
+    const createDigitInput = () => {
+        const input = document.createElement('input');
+        input.type = 'text';   
+        input.inputMode = 'numeric';
+        input.maxLength = 1;
+        input.style.textAlign = 'center';
+        input.style.width = '44.5px'
+        return input;
+    }
+
+    const inputArr = []
+
+    for (let i = 0; i < 3; i++) {
+        const input = createDigitInput();
+        inputArr.push(input);
+        codeCont.appendChild(input);
+    }
+
+    codeCont.style.display = 'flex'
+    codeCont.style.justifyContent = 'center'
+    codeCont.style.gap = '5px'
+    const checkButton = document.createElement('div')
+    checkButton.appendChild(document.createTextNode(lang === 'DE' ? 'Prüfen' : 'Check'));    
+    checkButton.classList.add('small-btn')
+    const checkCode = () => {
+        let total = 0;
+        if (inputArr[0].value === '1') {total++; inputArr[0].classList.add('nikolaus-green'); inputArr[0].readOnly = true;}
+        if (inputArr[1].value === '8') {total++; inputArr[1].classList.add('nikolaus-green'); inputArr[1].readOnly = true;}
+        if (inputArr[2].value === '2') {total++; inputArr[2].classList.add('nikolaus-green'); inputArr[2].readOnly = true;}
+
+        if (total === 3) {
+            setTimeout(() => {
+                console.log('redirect');
+                window.location.href = 'st-nikolaus.html';
+            }, 400);
+        } else {
+            checkButton.classList.add('shake');    
+            setTimeout(() => {
+                checkButton.classList.remove('shake');
+            }, 300);
+        }
+    }
+    
+    checkButton.addEventListener('click', (event) => {
+        checkCode()
+    })
+    codeCont.appendChild(checkButton)
+
+    inputArr.forEach((input, index) => {
+        input.addEventListener('input', () => {
+        if (input.value.length === 1 && index < inputArr.length - 1) {
+            inputArr[index + 1].focus();
+        }
+        });
+
+        input.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && input.value === '' && index > 0) {
+            inputArr[index - 1].focus();
+        }
+        });
+    });
+
+    wrapper.appendChild(codeCont)
+
+
+    
+    superWrapper.appendChild(wrapper)
+
+    return superWrapper
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -596,6 +814,10 @@ const riddleLib = [
         riddle: earthRiddle,
     },
     {
+        title: "#06 Nikolaus Riddle",
+        riddle: nikolausRiddle,
+    },
+    {
         title: "#59 Inequality Riddle",
         riddle: inequalityRiddle,
     },
@@ -604,7 +826,7 @@ const riddleLib = [
     
 
     // {
-    //     title: ""29 Elves Riddle",
+    //     title: "#29 Elves Riddle",
     //     riddle: elvesRiddle,
     // },
 

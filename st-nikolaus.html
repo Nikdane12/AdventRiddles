@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy St. Nikolaus Day</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --gold: #ffeb3b;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: radial-gradient(circle at top, #123, #000);
+      color: #fefefe;
+      overflow: hidden;
+    }
+
+    .scene {
+      position: relative;
+      padding: 2.5rem 2rem 3rem;
+      max-width: 480px;
+      width: 90%;
+      background: #ffffff;
+      border-radius: 24px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.08),
+        0 0 0 1px rgba(0, 0, 0, 0.02);
+      backdrop-filter: blur(14px);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: rgba(0, 0, 0, 0.8);
+      padding: 0.45rem 0.8rem;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 0, 0, 0.15);
+      background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.04),
+        rgba(0, 0, 0, 0.01)
+      );
+      margin-bottom: 1.4rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      margin-bottom: 0.8rem;
+      line-height: 1.1;
+      text-shadow: none;
+      color: #000000;
+    }
+
+    h1 span.red {
+      color: var(--gold);
+    }
+
+    h1 span.script {
+      font-family: "Segoe Script", "Snell Roundhand", "Brush Script MT", cursive;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 0.98rem;
+      color: rgba(0, 0, 0, 0.85);
+      margin-bottom: 1.8rem;
+    }
+
+    .subtitle span {
+      white-space: nowrap;
+    }
+
+    .hero {
+      width: 100%;
+      border-radius: 25px;
+    }
+
+    .message {
+      font-size: 0.95rem;
+      color: rgba(0, 0, 0, 0.88);
+      margin-bottom: 1.8rem;
+      line-height: 1.4;
+    }
+
+    .message span.em {
+      font-weight: 600;
+    }
+
+    /* Snowflakes */
+    .snowflake {
+      position: fixed;
+      top: -10px;
+      font-size: 0.7rem;
+      color: #35d0ff;
+      opacity: 0.9;
+      pointer-events: none;
+      animation-name: fall;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0.5;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="snowflake" style="left: 5%; animation-duration: 8s; animation-delay: 0s;">❄</div>
+<div class="snowflake" style="left: 20%; animation-duration: 11s; animation-delay: 1s;">✼</div>
+<div class="snowflake" style="left: 35%; animation-duration: 9s; animation-delay: 0.5s;">❅</div>
+<div class="snowflake" style="left: 50%; animation-duration: 12s; animation-delay: 1.5s;">❄</div>
+<div class="snowflake" style="left: 65%; animation-duration: 10s; animation-delay: 0.2s;">✼</div>
+<div class="snowflake" style="left: 80%; animation-duration: 13s; animation-delay: 2s;">❅</div>
+<div class="snowflake" style="left: 90%; animation-duration: 9s; animation-delay: 1.2s;">❄</div>
+
+<div class="snowflake" style="left: 12%; animation-duration: 9s; animation-delay: 0.7s;">❄</div>
+<div class="snowflake" style="left: 28%; animation-duration: 10s; animation-delay: 1.3s;">✼</div>
+<div class="snowflake" style="left: 42%; animation-duration: 11s; animation-delay: 0.3s;">❅</div>
+<div class="snowflake" style="left: 58%; animation-duration: 8s; animation-delay: 1.8s;">❄</div>
+<div class="snowflake" style="left: 72%; animation-duration: 12s; animation-delay: 0.9s;">✼</div>
+<div class="snowflake" style="left: 86%; animation-duration: 10s; animation-delay: 2.1s;">❅</div>
+<div class="snowflake" style="left: 95%; animation-duration: 13s; animation-delay: 0.4s;">❄</div>
+
+  <main class="scene">
+    <div class="badge">
+      <span>6 December · St. Nikolaus Day</span>
+    </div>
+
+    <img class="hero" src="./images/nikolausRiddle/hero.png" alt="St. Nikolaus illustration" />
+
+    <h1>
+      <span class="script">Happy</span> <span class="red">St. Nikolaus</span><br />
+      Day! 🎄
+    </h1>
+
+    <p class="subtitle">
+      May your <span>shoes be full</span>, your <span>heart be warm</span>, and your
+      <span>day be merry</span>.
+    </p>
+
+    <p class="message">
+      Wishing you a cozy evening with <span class="em">candles, cocoa</span>, and
+      maybe a little surprise from St. Nikolaus. ☕🍫
+    </p>
+  </main>
+</body>
+</html>

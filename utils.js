@@ -63,6 +63,10 @@ const removeSelf = divs => {
     });
 }
 
+const removeAll = div => {
+    while(div.firstChild){div.removeChild(div.firstChild)};
+}
+
 const createButton = (text) => {
     const buttonElement = document.createElement("button");
     const buttonSpan = document.createElement("span");

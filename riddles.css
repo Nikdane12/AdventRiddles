@@ -349,3 +349,51 @@
     top: 2px;
     position: relative;
 }
+
+.block {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.small-btn {
+    background: rgba(255, 255, 255, 0.06);
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid rgba(82, 82, 82, 0.24);
+    color: #363636;
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.nikolaus-button{
+    border-radius: 10px;
+    color: #fff;
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 74, 74);
+}
+
+.nikolaus-button:nth-of-type(2) {
+    background-color: rgb(56, 220, 56);
+}
+
+.nikolaus-green{
+    border-radius: 2px;
+    border: 1px solid rgb(15, 200, 0);
+    pointer-events: none;
+}
+
+.nikolaus-green::-webkit-inner-spin-button,
+.nikolaus-green::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.nikolaus-green {
+  -moz-appearance: textfield;
+}

@@ -216,7 +216,7 @@ window.openDoor = openDoor;
 window.eatTreat = eatTreat;
 window.toggleLang = toggleLang;
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keydown', (event) => {
   if (event.key === 'p') {
     window.print();
   }
