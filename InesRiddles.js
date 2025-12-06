@@ -617,8 +617,8 @@ const nikolausRiddle = (lang) => {
         subWrapper.appendChild(subText)
         const image = document.createElement('img')
         image.src = './images/nikolausRiddle/image.png'
-        image.classList.add('wreath-image');
-        image.style.width = '50%'
+        image.classList.add('wreath-image', 'nikolaus-img');
+        image.classList.add
 
         subWrapper.appendChild(image)
     }
