@@ -819,6 +819,60 @@ const sockRiddle = (lang) => {
     return container;
 }
 
+const messageRiddle1 = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            "The elves send each other secret messages, but they didn't count on you. Can you decipher the secret message?"
+        );
+    } else {
+        text = document.createTextNode(
+            "Die Elfen schicken sich gegenseitig geheime Nachrichten, aber sie haben nicht mit dir gerechnet. Kannst du die geheime Nachricht entschlüsseln?"
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+
+    const image = document.createElement('img');
+    image.src = `./images/messageRiddle/message1${lang}.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
+const messageRiddle2 = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            "The elves send each other secret messages, but they didn't count on you. Can you decipher the secret message?"
+        );
+    } else {
+        text = document.createTextNode(
+            "Die Elfen schicken sich gegenseitig geheime Nachrichten, aber sie haben nicht mit dir gerechnet. Kannst du die geheime Nachricht entschlüsseln?"
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+
+    const image = document.createElement('img');
+    image.src = `./images/messageRiddle/message2${lang}.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -848,6 +902,15 @@ const riddleLib = [
         title: "#42 Sock Riddle",
         riddle: sockRiddle,
     },
+    {
+        title: "#09 Sock Riddle",
+        riddle: messageRiddle1,
+    },
+    {
+        title: "#39 Sock Riddle",
+        riddle: messageRiddle2,
+    },
+    
 
     {
         title: "#59 Inequality Riddle",
