@@ -10,7 +10,8 @@ let currentlang
 const startup = () => {
     // lockbutton = document.getElementById('unlock')
     unlockstatus = 'lock'
-    // unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
+    unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
+    localStorage.setItem('kalanderlockstatus', unlockstatus)
     // if (unlockstatus == 'unlock') {
     //     lockbutton.innerHTML = `🔓`
     // }
@@ -72,7 +73,7 @@ const createDays = () => {
 
 const saveLocalStorage = () => {
     localStorage.setItem('daysarray', JSON.stringify(daysarray))
-    // localStorage.setItem('kalanderlockstatus', unlockstatus)
+    localStorage.setItem('kalanderlockstatus', unlockstatus)
     // localStorage.setItem('kalanderlangstatus', currentlang)
 }
 

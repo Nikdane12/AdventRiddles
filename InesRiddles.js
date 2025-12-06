@@ -792,6 +792,33 @@ const nikolausRiddle = (lang) => {
     return superWrapper
 }
 
+const sockRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            "Today is the big laundry day. However, there is a problem. The elves have very similar tastes and wear very similar socks. Can you help them find the two socks that belong together?"
+        );
+    } else {
+        text = document.createTextNode(
+            "Heute ist der große Waschtag. Allerdings gibt es ein Problem. Die Wichteln haben sehr ähnlichen Geschmack und tragen sehr sehr ähnliche Socken. Kannst du ihnen helfen, und die zwei Socken finden, die zusammen gehören?"
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+
+    const image = document.createElement('img');
+    image.src = `./images/sockRiddle/image.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -817,6 +844,11 @@ const riddleLib = [
         title: "#06 Nikolaus Riddle",
         riddle: nikolausRiddle,
     },
+    {
+        title: "#42 Sock Riddle",
+        riddle: sockRiddle,
+    },
+
     {
         title: "#59 Inequality Riddle",
         riddle: inequalityRiddle,
