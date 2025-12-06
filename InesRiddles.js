@@ -691,7 +691,7 @@ const nikolausRiddle = (lang) => {
     }
 
     const subRiddle1BUT = document.createElement('div')
-    subRiddle1BUT.appendChild(document.createTextNode('1'))
+    subRiddle1BUT.appendChild(document.createTextNode('Riddle 1'))
     subRiddle1BUT.classList.add('nikolaus-button')
 
     subRiddle1BUT.addEventListener('click', (event) => {
@@ -700,7 +700,7 @@ const nikolausRiddle = (lang) => {
     
 
     const subRiddle2BUT = document.createElement('div')
-    subRiddle2BUT.appendChild(document.createTextNode('2'))
+    subRiddle2BUT.appendChild(document.createTextNode('Riddle 2'))
     subRiddle2BUT.classList.add('nikolaus-button')
 
     subRiddle2BUT.addEventListener('click', (event) => {
