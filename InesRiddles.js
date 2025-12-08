@@ -903,15 +903,13 @@ const riddleLib = [
         riddle: sockRiddle,
     },
     {
-        title: "#09 Sock Riddle",
+        title: "#09 Message Riddle1",
         riddle: messageRiddle1,
     },
     {
-        title: "#39 Sock Riddle",
+        title: "#39 Message Riddle2",
         riddle: messageRiddle2,
     },
-    
-
     {
         title: "#59 Inequality Riddle",
         riddle: inequalityRiddle,
