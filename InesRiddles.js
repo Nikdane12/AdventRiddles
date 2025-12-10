@@ -873,6 +873,34 @@ const messageRiddle2 = (lang) => {
     return container;
 }
 
+const mazeRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `${playerName} the elf has lost their way. You want to rescue them, but you want to save energy and take the shortest route. The three paths are split into segments. Work out how long each segment is and add them up for each colour. Which path (red, green, blue) will get you there using the least energy?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Der Wichtel ${playerName} hat sich verlaufen. Du möchtest ihn retten, aber Energie sparen und den kürzesten Weg nehmen. Die drei Wege sind in Abschnitte unterteilt. Finde heraus, wie lang jeder Abschnitt ist und addiere die Längen für jede Farbe. Welcher Weg (Rot, Grün, Blau) bringt dich mit dem geringsten Energieaufwand zu ihm?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `.images/mazeRiddle/image.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -914,6 +942,10 @@ const riddleLib = [
         title: "#59 Inequality Riddle",
         riddle: inequalityRiddle,
     },
+    {
+        title: "#32 Maze Riddle",
+        riddle: mazeRiddle,
+    }
     
     
     
