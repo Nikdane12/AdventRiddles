@@ -889,7 +889,7 @@ const mazeRiddle = (lang) => {
     textElement.classList.add('riddleText', 'hori');
 
     const image = document.createElement('img');
-    image.src = `.images/mazeRiddle/image.png`;
+    image.src = `./images/mazeRiddle/image.png`;
     image.classList.add('wreath-image');
 
     const container = document.createElement('div');
