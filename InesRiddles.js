@@ -900,6 +900,33 @@ const mazeRiddle = (lang) => {
     return container;
 }
 
+const shapeRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Now it's time to pay attention. The elf ${playerName} has drawn a complex pattern of triangles. However, they aren't sure how many triangles there are in total. Can you help?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Jetzt ist es Zeit, aufmerksam zu sein. Die Elfe ${playerName} hat ein komplexes Muster aus Dreiecken gezeichnet. Allerdings ist die Elfenperson nicht sicher, wie viele Dreiecke es insgesamt sind. Kannst du helfen?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `./images/shapeRiddle/image.png`;
+    image.classList.add('wreath-image');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
 
 const riddleLib = [
     {
@@ -945,6 +972,10 @@ const riddleLib = [
     {
         title: "#32 Maze Riddle",
         riddle: mazeRiddle,
+    },
+    {
+        title: "#09 Shape Riddle",
+        riddle: shapeRiddle,
     }
     
     
