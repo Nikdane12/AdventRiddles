@@ -371,8 +371,11 @@
 }
 
 @media (orientation: landscape) {
-    .nikolaus-img {
+    .nikolaus-img, .shape-riddle {
         width: 50%;
+    }
+    .egypt-riddle{
+        width: 70%;
     }
 }
 

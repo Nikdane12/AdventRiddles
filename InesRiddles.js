@@ -917,7 +917,88 @@ const shapeRiddle = (lang) => {
 
     const image = document.createElement('img');
     image.src = `./images/shapeRiddle/image.png`;
-    image.classList.add('wreath-image');
+    image.classList.add('wreath-image', 'shape-riddle');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
+const sphinxRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Today, ancient Egypt is on the agenda. Even the Sphinx is eagerly awaiting its gift. The elves are now preparing to pass by the Sphinx. Can you help them?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Heute steht das alte Ägypten auf dem Programm. Sogar die Sphinx wartet gespannt auf ihr Geschenk. Die Elfen bereiten sich nun darauf vor, an der Sphinx vorbeizukommen. Kannst du ihnen helfen?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `./images/egyptRiddle/image${lang}.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
+const foodRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Today we're cooking together! But something's strange! All the ingredients have something in common except for one. Can you save Christmas dinner and pick out the one ingredient that doesn't fit the pattern?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Heute steht das gemeinsame Kochen an! Aber irgendetwas ist seltsam! Alle Zutaten haben etwas gemeinsam, bis auf eine. Kannst du das Weihnachtsessen retten und die eine Zutat herausfinden, die nicht zum Muster passt?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `./images/foodRiddle/image.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
+const diceRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `The die has been cast - like a sparkling Christmas star in the sky! Follow the glittering line through the enchanted forest and discover the number that lights up at the top of the die at the end.`
+        );
+    } else {
+        text = document.createTextNode(
+            `Der Würfel ist gefallen – wie ein funkelnder Weihnachtsstern am Himmel! Folge der glitzernden Linie durch den Zauberwald und entdecke die Zahl, die am Ende oben auf dem Würfel leuchtet.`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `./images/diceRiddle/image.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
 
     const container = document.createElement('div');
     container.classList.add('wreath-riddle');
@@ -976,7 +1057,20 @@ const riddleLib = [
     {
         title: "#09 Shape Riddle",
         riddle: shapeRiddle,
-    }
+    },
+    {
+        title: "#81 Sphinx Riddle",
+        riddle: sphinxRiddle,
+    },
+    {
+        title: "#18 Food Riddle",
+        riddle: foodRiddle,
+    },
+    {
+        title: "#41 Dice Riddle",
+        riddle: diceRiddle,
+    },
+    
     
     
     
