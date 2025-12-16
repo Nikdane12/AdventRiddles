@@ -411,3 +411,20 @@
 .nikolaus-green {
   -moz-appearance: textfield;
 }
+
+.picturesRiddle_imagesCont{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+.picturesRiddle_images{
+    /* height: 100%; */
+    object-fit: fill;
+    width: 100px;
+}
+.picturesRiddle_images:nth-of-type(5){width: 200px;}
+
+.picturesCell{
+    width: 10px;
+    border-bottom: 2px solid black;
+}

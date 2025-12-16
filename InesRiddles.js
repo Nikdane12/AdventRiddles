@@ -654,7 +654,7 @@ const nikolausRiddle = (lang) => {
         subsubText.classList.add('riddleRightWrapper')
         subsubText.style.width = '40%'
         if (lang == "EN") {
-            subsubText.appendChild(document.createTextNode('Nikolaus Day is full of joyful and magical moments! Imagine a man in a big red coat trying to sneak around quietly - but he always ends up tripping over shoes or dropping mandarins and M&M everywhere. Kids leave out their shoes and sometimes when the kids were well- behaved the Nikolaus fills them! Sometimes the kids are clever, and they will use the shoes of their parents. So, there is more to fill . The excitement in the morning make this tradition a magical part of the holiday season.'))
+            subsubText.appendChild(document.createTextNode('Nikolaus Day is full of joyful and magical moments! Imagine a man in a big red coat trying to sneak around quietly - but he always ends up tripping over shoes or dropping mandarins and M&M everywhere. Kids leave out their shoes and sometimes when the kids were well- behaved the Nikolaus fills them! Sometimes the kids are clever, and they will use the shoes of their parents. So, there is more to fill. The excitement in the morning make this tradition a magical part of the holiday season.'))
         } else {
             subsubText.appendChild(document.createTextNode('Nikolaus hat’s nicht leicht: Mit seinem großen Sack voller Mandarinen, Nüsse und Schokolade muss er durch den kalten Dezember marschieren. Manchmal verirrt er sich sogar und landet im Wohnzimmer statt vor der Tür! Die Kinder lachen, wenn der Nikolaus dann mit roten Backen und einem mürrischen „Hohoho“ versucht, die Geschenke zu verteilen. Aber am Ende freut sich jeder – sogar der Nikolaus, der sich heimlich ein paar Mandarinen mopsen darf.'))
         }
@@ -1035,6 +1035,90 @@ const scrambleRiddle = (lang) => {
     return container;
 }
 
+const picturesRiddle = (lang) => {
+    const words = {
+        EN:[{first: "C", length: 8,},{first: "S", length: 8,},{first: "B", length: 5,},
+            {type: "pair", pair:[
+                {first: "B", length: 9},
+                {first: "P", length: 3},
+        ],},{first: "O", length: 5 },
+            {type: "pair", pair:[
+                {first: "T", length: 6},
+                {first: "P", length: 5 },
+        ],},],
+        DE:[{first: "K", length: 10,},{first: "S", length: 6,},{first: "B", length: 4,},{first: "K", length: 14,},{first: "Z", length: 7,},{first: "T", length: 15,}, ]
+    }
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `In the mysterious elf workshop, all the sparkling gifts and magical items were carefully documented. Can you help the diligent elves identify each item?`
+        );
+    } else {
+        text = document.createTextNode(
+            `In der geheimnisvollen Wichtelstube wurden alle funkelnden Geschenke und magischen Gegenstände sorgfältig dokumentiert. Kannst du den fleißigen Wichteln helfen, jeden Gegenstand zu identifizieren?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const imageContainer = document.createElement('div')
+    imageContainer.classList.add('picturesRiddle_imagesCont')
+
+    for(i = 0; i < 6; i++){
+        const image = document.createElement('img');
+        image.src = `./images/picturesRiddle/${i}.png`;
+        image.classList.add('picturesRiddle_images');
+        imageContainer.appendChild(image)
+    }
+
+    const textContainer = document.createElement('div')
+
+    words[lang].forEach(e => {
+        const textLines = document.createElement('div')
+        textLines.style.display = 'flex'
+        textLines.style.gap = '5px'
+        textLines.style.justifyContent = 'center'
+
+        if (e.type === 'pair') {
+            let obj = e.pair[0]
+            for (i = 0; i < obj.length; i++){
+                const cell = document.createElement('div')
+                cell.classList.add('picturesCell')
+                if (i == 0){cell.appendChild(document.createTextNode(obj.first))}
+                textLines.appendChild(cell)
+            }
+            textLines.appendChild(document.createTextNode('-'))
+            obj = e.pair[1]
+            for (i = 0; i < obj.length; i++){
+                const cell = document.createElement('div')
+                cell.classList.add('picturesCell')
+                if (i == 0){cell.appendChild(document.createTextNode(obj.first))}
+                textLines.appendChild(cell)
+            }
+        }
+        
+        for (i = 0; i < e.length; i++){
+            const cell = document.createElement('div')
+            cell.classList.add('picturesCell')
+            if (i == 0){cell.appendChild(document.createTextNode(e.first))}
+            textLines.appendChild(cell)
+        }
+        textContainer.appendChild(textLines)
+    });
+
+    const riddleBody = document.createElement('div')
+    riddleBody.appendChild(imageContainer)
+    riddleBody.appendChild(textContainer)
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(riddleBody);
+
+    return container;
+}
 
 const riddleLib = [
     {
@@ -1100,6 +1184,10 @@ const riddleLib = [
     {
         title: "#20 Scramble Riddle",
         riddle: scrambleRiddle,
+    },
+    {
+        title: "#35 Picture Riddle",
+        riddle: picturesRiddle,
     }
     
     
