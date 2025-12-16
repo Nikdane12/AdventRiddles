@@ -1008,6 +1008,33 @@ const diceRiddle = (lang) => {
     return container;
 }
 
+const scrambleRiddle = (lang) => {
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Follow the red lines that lead like glowing strings of lights through the snow-covered winter forest. They will bring you to a secret, magical meeting place where Christmas joy awaits you. Name the secret meeting place and become part of the Christmas miracle!`
+        );
+    } else {
+        text = document.createTextNode(
+            `Folge den roten Linien, die wie leuchtende Lichterketten durch den verschneiten Winterwald führen. Sie bringen dich zu einem geheimen, magischen Treffpunkt, wo die Weihnachtsfreude auf dich wartet. Nenne den geheimen Treffpunkt und werde Teil des Weihnachtswunders!`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    const image = document.createElement('img');
+    image.src = `./images/scrambleRiddle/image${lang}.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
+
+    const container = document.createElement('div');
+    container.classList.add('wreath-riddle');
+    container.appendChild(textElement);
+    container.appendChild(image);
+
+    return container;
+}
+
 
 const riddleLib = [
     {
@@ -1070,6 +1097,10 @@ const riddleLib = [
         title: "#41 Dice Riddle",
         riddle: diceRiddle,
     },
+    {
+        title: "#20 Scramble Riddle",
+        riddle: scrambleRiddle,
+    }
     
     
     
