@@ -428,3 +428,22 @@
     width: 10px;
     border-bottom: 2px solid black;
 }
+
+.wordGridElement{
+    display: flex;
+    margin: auto;
+    flex-direction: column;
+    width: min-content;
+}
+
+.wordRow{
+    display: flex;
+}
+
+.wordLetter{
+    text-align: center;
+    --size: 30px;
+    width: var(--size);
+    height: var(--size);
+    border: 1px solid black;
+}

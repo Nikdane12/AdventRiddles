@@ -545,7 +545,137 @@ const inequalityRiddle = (lang) => {
 };
 
 const wordSearchRiddle = (lang) => {
+    const myRiddle = document.createElement('div')
 
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            "The elf Anette wants to challenge Santa Claus. She has hidden the words heart, angel, advent, winter, tree, decorating in the jumble of letters. You can find them diagonally, vertically, horizontally, and even backwards. All words have ONE thing in common. Connect this commonality from row to row. What do you see?"
+        );
+    } else {
+        text = document.createTextNode(
+            "Die Elfe Anette möchte den Weihnachtsmann herausfordern. Sie hat die Wörter Herz, Familie, Advent, Tanne, Winter und Weihnachtsbaum in dem Buchstabenwirrwarr versteckt. Man kann sie diagonal, vertikal, horizontal und sogar rückwärts finden. Alle Wörter haben EINE Gemeinsamkeit. Verbinde diese Gemeinsamkeit. Was siehst du?"
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+    textElement.style.padding = '0'
+
+    let grid;
+    if (lang == "EN") {
+        grid = [   
+            ['F','S','A','Q','E','T','Z','H','A','G','T','H','J','V','X',],
+            ['I','E','H','T','O','S','G','B','F','L','O','R','D','G','H',],
+            ['D','R','E','T','U','J','V','D','U','I','L','L','T','E','W',],
+            ['U','J','A','E','R','T','Z','J','K','H','D','E','W','E','T',],
+            ['Z','U','R','I','J','F','D','B','N','M','J','G','H','T','S',],
+            ['A','W','T','Z','I','O','K','O','D','V','B','N','S','A','E',],
+            ['R','T','U','O','P','S','D','G','H','N','M','A','A','E','T',],
+            ['G','U','F','G','A','D','V','E','N','T','S','M','Y','N','L',],
+            ['R','H','O','L','P','O','S','T','A','W','R','A','Z','I','L',],
+            ['D','F','Z','U','K','D','A','S','A','X','B','F','E','R','T',],
+            ['M','E','R','E','T','N','I','W','O','T','S','D','R','Z','J',],
+            ['A','W','E','R','T','U','N','M','U','P','R','S','G','P','A',],
+            ['N','I','P','A','R','R','M','E','Q','U','B','E','P','L','O',],
+            ['A','R','T','N','U','D','S','M','K','L','O','S','E','A','M',],
+            ['D','E','C','O','R','A','T','I','N','G','B','L','S','A','N',],
+        ];
+    }
+    else {
+        grid = [
+            ['F','S','A','Q','E','T','Z','H','A','G','T','H','J','V','X'],
+            ['I','E','H','T','O','S','G','B','F','L','O','R','D','G','H'],
+            ['D','R','E','T','U','J','V','D','U','I','L','P','T','E','W'],
+            ['U','J','R','E','R','T','Z','J','K','H','D','E','W','E','T'],
+            ['Z','U','Z','I','J','F','D','B','N','M','J','I','H','T','S'],
+            ['A','W','R','Z','I','O','K','O','D','V','B','L','S','A','E'],
+            ['R','T','U','O','P','S','D','G','H','N','M','I','A','E','T'],
+            ['G','U','F','G','A','D','V','E','N','T','S','M','Y','N','L'],
+            ['R','H','O','L','P','O','S','T','A','W','R','A','Z','I','L'],
+            ['D','F','Z','U','K','D','A','S','A','X','B','F','E','R','T'],
+            ['M','E','R','E','T','N','I','W','O','N','S','D','R','Z','J'],
+            ['A','W','E','R','T','U','N','M','U','P','N','S','G','P','A'],
+            ['N','I','P','A','R','R','M','E','Q','U','B','E','P','L','O'],
+            ['A','R','T','N','U','D','S','M','K','L','O','S','T','A','M'],
+            ['W','E','I','H','N','A','C','H','T','S','B','A','U','M','N'],
+        ];
+    }
+
+    const gridElement = document.createElement('div')
+    gridElement.classList.add('wordGridElement')
+    grid.forEach(row => {
+        const rowElement = document.createElement('div')
+        rowElement.classList.add('wordRow')
+        row.forEach(letter => {
+            const letterElement = document.createElement('div')
+            letterElement.classList.add('wordLetter')
+            letterElement.appendChild(document.createTextNode(letter))
+            rowElement.appendChild(letterElement)
+        });
+        gridElement.appendChild(rowElement)
+    });
+
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = 480;
+    canvas.height = 480;
+
+    let isPainting = false;
+    let lineWidth = 10;
+
+    const draw = (e) => {
+        if (!isPainting) return;
+
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+        ctx.strokeStyle = 'yellow';
+
+        ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left , e.clientY - canvas.getBoundingClientRect().top);
+        ctx.stroke();
+    };
+
+    canvas.addEventListener('mousedown', (e) => {
+        isPainting = true;
+        ctx.beginPath();
+        ctx.moveTo(e.clientX - canvas.getBoundingClientRect().left , e.clientY - canvas.getBoundingClientRect().top);      
+    });
+
+    canvas.addEventListener('mouseup', () => {
+        isPainting = false;
+        ctx.closePath();
+    });
+
+
+
+    canvas.addEventListener('mousemove', draw);
+
+    canvas.style.position = 'absolute';
+    canvas.style.height = `${(grid.length + 1) * (30)}px`;
+    canvas.style.width  = `${(grid[0].length + 1) * (30)}px`;
+    canvas.style.opacity = '0.5';
+
+
+    const removeBut = document.createElement('div');
+    removeBut.classList.add('small-btn')
+    removeBut.style.width = 'min-content';
+    removeBut.style.height = 'min-content';
+    removeBut.style.margin = 'auto';
+    removeBut.appendChild(document.createTextNode(lang === 'DE' ? 'Löschen' : 'CLEAR'))
+
+    removeBut.addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    myRiddle.appendChild(textElement)
+    myRiddle.appendChild(removeBut)
+    myRiddle.appendChild(gridElement)
+    gridElement.appendChild(canvas)
+
+
+    return myRiddle
 }
 
 const earthRiddle = (lang) => {
@@ -1188,6 +1318,34 @@ const riddleLib = [
     {
         title: "#35 Picture Riddle",
         riddle: picturesRiddle,
+    },
+    {
+        title: "#92 Word Search Riddle",
+        riddle: wordSearchRiddle,
+    },
+    {
+        title: "#21 Detective Riddle",
+        riddle: ""
+    },
+    {
+        title: "#44 Music Riddle",
+        riddle: ""
+    },
+    {
+        title: "#56 ___ Riddle",
+        riddle: ""
+    },
+    {
+        title: "#08 ___ Riddle",
+        riddle: ""
+    },
+    {
+        title: "#27 ___ Riddle",
+        riddle: ""
+    },
+    {
+        title: "#64 ___ Riddle",
+        riddle: ""
     }
     
     
