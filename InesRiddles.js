@@ -66,22 +66,20 @@ const mapRiddle = (lang) => {
 };
 
 const elvesRiddle = (lang) => {
-    const riddleText = "The elves are sitting around a campfire discussing magic, plants, films and tea. They cannot agree on which symbols belong to which categories. Can you help? There are three symbols for each category. Connect them to form a triangle. (You will have four triangles.) Count how many individual lines can be found from other triangles in each triangle. The numbers correspond to letters. Can you find the correct solution word?";
-
-    const photoPos = [ // in %
-        { file: "camera", X: -46.8, Y: 84.3 },
-        { file: "potion", X: -25.4, Y: 10.1 },
-        { file: "ring", X: -42.4, Y: 15.3 },
-        { file: "daisies", X: -71.7, Y: 20.7 },
-        { file: "rabbit", X: -8.0, Y: 31.6 },
-        { file: "strangPlant", X: -59.9, Y: 43.9 },
-        { file: "sunflower", X: -91.6, Y: 45.8 },
-        { file: "wizard", X: -30.2, Y: 48.5 },
-        { file: "mint", X: -78.7, Y: 60.8 },
-        { file: "chaplin", X: -8.6, Y: 66.9 },
-        { file: "dot", X: -35.3, Y: 66.9 },
-        { file: "orchid", X: -64.4, Y: 84.1 },
-    ];
+    // const photoPos = [ // in %
+    //     { file: "camera", X: -46.8, Y: 84.3 },
+    //     { file: "potion", X: -25.4, Y: 10.1 },
+    //     { file: "ring", X: -42.4, Y: 15.3 },
+    //     { file: "daisies", X: -71.7, Y: 20.7 },
+    //     { file: "rabbit", X: -8.0, Y: 31.6 },
+    //     { file: "strangPlant", X: -59.9, Y: 43.9 },
+    //     { file: "sunflower", X: -91.6, Y: 45.8 },
+    //     { file: "wizard", X: -30.2, Y: 48.5 },
+    //     { file: "mint", X: -78.7, Y: 60.8 },
+    //     { file: "chaplin", X: -8.6, Y: 66.9 },
+    //     { file: "dot", X: -35.3, Y: 66.9 },
+    //     { file: "orchid", X: -64.4, Y: 84.1 },
+    // ];
 };
 
 const matchRiddle = (lang) => {
@@ -550,11 +548,11 @@ const wordSearchRiddle = (lang) => {
     let text;
     if (lang == "EN") {
         text = document.createTextNode(
-            "The elf Anette wants to challenge Santa Claus. She has hidden the words heart, angel, advent, winter, tree, decorating in the jumble of letters. You can find them diagonally, vertically, horizontally, and even backwards. All words have ONE thing in common. Connect this commonality from row to row. What do you see?"
+            "The elf Anette wants to challenge Santa Claus. She has hidden the words heart, angel, advent, winter, tree, decorating in the jumble of letters. You can find them diagonally, vertically, horizontally, and even backwards. All words have ONE thing in common. Connect this commonality from row to row. What do you see? Tip: Take a screenshot and draw on it"
         );
     } else {
         text = document.createTextNode(
-            "Die Elfe Anette möchte den Weihnachtsmann herausfordern. Sie hat die Wörter Herz, Familie, Advent, Tanne, Winter und Weihnachtsbaum in dem Buchstabenwirrwarr versteckt. Man kann sie diagonal, vertikal, horizontal und sogar rückwärts finden. Alle Wörter haben EINE Gemeinsamkeit. Verbinde diese Gemeinsamkeit. Was siehst du?"
+            "Die Elfe Anette möchte den Weihnachtsmann herausfordern. Sie hat die Wörter Herz, Familie, Advent, Tanne, Winter und Weihnachtsbaum in dem Buchstabenwirrwarr versteckt. Man kann sie diagonal, vertikal, horizontal und sogar rückwärts finden. Alle Wörter haben EINE Gemeinsamkeit. Verbinde diese Gemeinsamkeit. Was siehst du? Tipp: Mach einen Screenshot und zeichne darauf"
         );
     }
     const textElement = document.createElement('p');
