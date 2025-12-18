@@ -447,3 +447,9 @@
     height: var(--size);
     border: 1px solid black;
 }
+
+ul{
+    white-space: wrap;
+    text-align: start;
+    margin: 0;
+}

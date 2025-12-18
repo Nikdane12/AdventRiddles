@@ -1248,6 +1248,66 @@ const picturesRiddle = (lang) => {
     return container;
 }
 
+const detectiveRiddle = (lang) => {
+    const riddleBody = document.createElement('div')
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Oh no! Someone has eaten the Christmas biscuits. Can you help the Christmas police find the cookie monster?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Oh nein! Jemand hat die Weihnachtsplätzchen gegessen. Kannst du der Weihnachtspolizei helfen, das Krümelmonster zu finden?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+    textElement.style.margin = '0 auto'
+
+    let detectiveText;
+    if (lang == "EN") {
+        detectiveText = `<ul><li>The tallest person cannot eat nuts. </li>
+<li>The person who ate them has two neighbours, one of whom witnessed the act. </li>
+<li>There are two people who claim to have seen the perpetrator, one is telling the truth, the other is lying.</li>
+<ul><li>One person has two people between themselves and the tallest person. </li>
+<li>The other has four people between themselves.</li>
+<li>The one who is telling the truth is not at either end. </li>
+<li>The one who is not telling the truth claims that their neighbour on the right ate the biscuits.</li>
+<li>The person who has been wrongly accused has more than three people between them and the tall person.  </li>
+</ul><li>The tall person has two friends by their side who did not eat the biscuits and also observed their neighbours, but did not see anything. </li>
+<li>The liar is far away from the scene of the crime.</li></ul>`
+    } else {
+        detectiveText = 
+            `<ul><li>Die größte Person kann keine Nüsse essen. </li>
+<li>Die Person, die sie gegessen hat, hat zwei Nachbarn, von denen einer die Tat beobachtet hat. </li>
+<li>Es gibt zwei Personen, die behaupten, den Täter gesehen zu haben, eine sagt die Wahrheit, die andere lügt.</li>
+<ul><li>Eine Person hat zwei Personen zwischen sich und der größten Person. </li>
+<li>Die andere  hat vier Personen zwischen sich.</li>
+<li>Derjenige, der die Wahrheit sagt, befindet sich nicht an einem der Enden. </li>
+<li>Derjenige, der nicht die Wahrheit sagt, behauptet, dass sein rechter Nachbar die Kekse gegessen hat.</li>
+<li>Der zu Unrecht Beschuldigte hat mehr als drei Personen zwischen sich und der großen Person.  </li>
+</ul><li>Die große Person hat zwei Freunde an seiner Seite, die die Kekse nicht gegessen haben und auch ihre Nachbarn beobachtet haben, aber nichts gesehen haben. </li>
+<li>Der Lügner ist weit entfernt vom Ort des Geschehens.</li>`
+    }
+    const detectiveTextElement = document.createElement('div');
+    detectiveTextElement.innerHTML = detectiveText;
+    detectiveTextElement.classList.add('riddleText', 'hori');
+    detectiveTextElement.style.padding = '0 1rem'
+
+    const image = document.createElement('img');
+    image.src = `./images/detectiveRiddle/image.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
+    
+
+    riddleBody.appendChild(textElement)
+    riddleBody.appendChild(detectiveTextElement)
+    riddleBody.appendChild(image)
+
+    return riddleBody
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -1323,7 +1383,7 @@ const riddleLib = [
     },
     {
         title: "#21 Detective Riddle",
-        riddle: ""
+        riddle: detectiveRiddle,
     },
     {
         title: "#44 Music Riddle",
