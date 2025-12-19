@@ -1308,6 +1308,44 @@ const detectiveRiddle = (lang) => {
     return riddleBody
 }
 
+const musicRiddle = (lang) => {
+    const riddleBody = document.createElement('div')
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Ouch! What kind of music are the elves listening to here? The elves really enjoy listening to two songs at the same time. That way, both sides are happy. Can you figure out which two songs are being played?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Autsch! Was für Musik hören die Elfen denn hier? Die Elfen hören sehr gerne zwei Lieder gleichzeitig. Dann sind zwei Partien glücklich. Kannst du auch heraus finden, welche zwei Lieder gespielt werden?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    let audioPath = lang === "EN" ? "./audio/AUD-20251215-WA0001.mp3" : "./audio/Media1.mp3";
+
+    const audioElement = document.createElement("audio");
+    audioElement.controls = true;
+
+    const sourceMp3 = document.createElement("source");
+    sourceMp3.src = audioPath;
+    sourceMp3.type = "audio/mpeg";
+
+    audioElement.append(sourceMp3);
+
+    audioElement.appendChild(document.createTextNode("Your browser does not support the audio tag."));
+
+    audioElement.classList.add("riddleAudio", "hori");
+
+    riddleBody.appendChild(textElement)
+    riddleBody.appendChild(audioElement);
+
+    return riddleBody
+}
+
 const riddleLib = [
     {
         title: "#74 Wreath Riddle",
@@ -1387,7 +1425,7 @@ const riddleLib = [
     },
     {
         title: "#44 Music Riddle",
-        riddle: ""
+        riddle: musicRiddle,
     },
     {
         title: "#56 ___ Riddle",
