@@ -1348,99 +1348,99 @@ const musicRiddle = (lang) => {
 
 const riddleLib = [
     {
-        title: "#74 Wreath Riddle",
+        title: "Wreath Riddle",
         riddle: wreathRiddle,
     },
     {
-        title: "#82 Sudoku Riddle",
+        title: "Sudoku Riddle",
         riddle: sudokuRiddle,
     },
     {
-        title: "#65 Match Riddle",
+        title: "Match Riddle",
         riddle: matchRiddle,
     },
     {
-        title: "#52 Map Riddle",
+        title: "Map Riddle",
         riddle: mapRiddle,
     },
     {
-        title: "#12 Earth Riddle",
+        title: "Earth Riddle",
         riddle: earthRiddle,
     },
     {
-        title: "#06 Nikolaus Riddle",
+        title: "Nikolaus Riddle",
         riddle: nikolausRiddle,
     },
     {
-        title: "#42 Sock Riddle",
+        title: "Sock Riddle",
         riddle: sockRiddle,
     },
     {
-        title: "#09 Message Riddle1",
+        title: "Message Riddle1",
         riddle: messageRiddle1,
     },
     {
-        title: "#39 Message Riddle2",
+        title: "Message Riddle2",
         riddle: messageRiddle2,
     },
     {
-        title: "#59 Inequality Riddle",
+        title: "Inequality Riddle",
         riddle: inequalityRiddle,
     },
     {
-        title: "#32 Maze Riddle",
+        title: "Maze Riddle",
         riddle: mazeRiddle,
     },
     {
-        title: "#09 Shape Riddle",
+        title: "Shape Riddle",
         riddle: shapeRiddle,
     },
     {
-        title: "#81 Sphinx Riddle",
+        title: "Sphinx Riddle",
         riddle: sphinxRiddle,
     },
     {
-        title: "#18 Food Riddle",
+        title: "Food Riddle",
         riddle: foodRiddle,
     },
     {
-        title: "#41 Dice Riddle",
+        title: "Dice Riddle",
         riddle: diceRiddle,
     },
     {
-        title: "#20 Scramble Riddle",
+        title: "Scramble Riddle",
         riddle: scrambleRiddle,
     },
     {
-        title: "#35 Picture Riddle",
+        title: "Picture Riddle",
         riddle: picturesRiddle,
     },
     {
-        title: "#92 Word Search Riddle",
+        title: "Search Riddle",
         riddle: wordSearchRiddle,
     },
     {
-        title: "#21 Detective Riddle",
+        title: "Detective Riddle",
         riddle: detectiveRiddle,
     },
     {
-        title: "#44 Music Riddle",
+        title: "Music Riddle",
         riddle: musicRiddle,
     },
     {
-        title: "#56 ___ Riddle",
+        title: "___ Riddle",
         riddle: ""
     },
     {
-        title: "#08 ___ Riddle",
+        title: "___ Riddle",
         riddle: ""
     },
     {
-        title: "#27 ___ Riddle",
+        title: "___ Riddle",
         riddle: ""
     },
     {
-        title: "#64 ___ Riddle",
+        title: "___ Riddle",
         riddle: ""
     }
     
@@ -1461,7 +1461,7 @@ const openRiddle = (num, lang) => {
     const idx = num - 1;
 
     const header = document.createElement('div');
-    header.innerText = riddleLib[idx].title;
+    header.innerText = `#${num} ` + riddleLib[idx].title;
 
     const riddleBody = document.createElement('div');
     riddleBody.classList.add("riddlebody");
