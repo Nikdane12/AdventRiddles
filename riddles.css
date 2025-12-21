@@ -370,14 +370,7 @@
     width: 90%;
 }
 
-@media (orientation: landscape) {
-    .nikolaus-img, .shape-riddle {
-        width: 50%;
-    }
-    .egypt-riddle{
-        width: 70%;
-    }
-}
+
 
 
 .nikolaus-button{
@@ -466,4 +459,23 @@ td:nth-child(2n){
 
 @media (hover: none) and (pointer: coarse) {
     .mobile-hideButton{display: none;}
+}
+
+.svgCont{
+    width: 50%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+@media (orientation: landscape) {
+    .nikolaus-img, .shape-riddle {
+        width: 50%;
+    }
+    .egypt-riddle{
+        width: 70%;
+    }
+
+    .svgCont{
+        width: 75%;
+    }
 }
