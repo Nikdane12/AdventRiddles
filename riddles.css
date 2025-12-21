@@ -388,7 +388,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(255, 74, 74);
+    background-color: #ff4a4a;
 }
 
 .nikolaus-button:nth-of-type(2) {
@@ -452,4 +452,18 @@ ul{
     white-space: wrap;
     text-align: start;
     margin: 0;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    width: 263px;
+}
+
+td:nth-child(2n){
+    background-color: rgba(40, 40, 40, 0.1);
+}
+
+@media (hover: none) and (pointer: coarse) {
+    .mobile-hideButton{display: none;}
 }

@@ -66,20 +66,160 @@ const mapRiddle = (lang) => {
 };
 
 const elvesRiddle = (lang) => {
-    // const photoPos = [ // in %
-    //     { file: "camera", X: -46.8, Y: 84.3 },
-    //     { file: "potion", X: -25.4, Y: 10.1 },
-    //     { file: "ring", X: -42.4, Y: 15.3 },
-    //     { file: "daisies", X: -71.7, Y: 20.7 },
-    //     { file: "rabbit", X: -8.0, Y: 31.6 },
-    //     { file: "strangPlant", X: -59.9, Y: 43.9 },
-    //     { file: "sunflower", X: -91.6, Y: 45.8 },
-    //     { file: "wizard", X: -30.2, Y: 48.5 },
-    //     { file: "mint", X: -78.7, Y: 60.8 },
-    //     { file: "chaplin", X: -8.6, Y: 66.9 },
-    //     { file: "dot", X: -35.3, Y: 66.9 },
-    //     { file: "orchid", X: -64.4, Y: 84.1 },
-    // ];
+    const riddleBody = document.createElement('div')
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            "The elves are sitting around a campfire discussing magic, plants, films and tea. They cannot agree on which symbols belong to which categories. Can you help? There are three symbols for each category. Connect them to form a triangle. (You will have four triangles.) Count how many individual lines can be found from other triangles in each triangle. The numbers correspond to letters. Can you find the correct solution word? \n On PC you can draw on the image, on mobile you should screenshot."
+        );
+    } else {
+        text = document.createTextNode(
+            "Die Wichteln sitzen um ein Lagerfeuer und diskutieren über Magie, Pflanzen, Film, Tee. Sie sind sich uneinig, welche Symbole zur welche Kategorien gehören. Kannst du helfen? Für jede Kategorie sind drei Symbole gegeben. Verbinde diese zu einem Dreieck. (Du wist also vier Dreiecke haben.) Zähle in jedem Dreieck, wie viele einzelne Linien von anderen Dreiecken zu finden sind. Die Zahlen entsprechen Buchstaben. Kannst du das richtige Lösungswort finden? \n Am PC kannst du auf dem Bild zeichnen, auf dem Handy solltest du einen Screenshot machen."
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text)
+    textElement.classList.add('riddleText', 'hori')
+    textElement.style.padding = '0'
+
+    riddleBody.appendChild(textElement)
+
+    const data = [
+        ["1","2","3","4","5","6","7"],
+        ["B","A","E","L","S","T","F"],
+    ];
+    const table = document.createElement("table");
+    const tbody = document.createElement("tbody");
+
+    for (const row of data) {
+    const tr = document.createElement("tr");
+    for (const cell of row) {
+        const td = document.createElement("td");
+        td.textContent = cell;
+        tr.appendChild(td);
+    }
+    tbody.appendChild(tr);
+    }
+
+    table.appendChild(tbody);
+    table.style.margin = '0 auto'
+
+    riddleBody.appendChild(table)
+
+    // const image = document.createElement('img');
+    // image.src = `./images/elvesRiddle/image.png`;
+    // image.classList.add('wreath-image', 'egypt-riddle');
+
+    // riddleBody.appendChild(image)
+
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    
+
+    // canvas.width = 480;
+    // canvas.height = 480;
+
+    let isDrawing = false;
+    let lineWidth = 10;
+
+    ctx.lineWidth = lineWidth;
+    ctx.lineCap = 'round';
+
+    let startpointX, startpointY, savedCanvasState = null;
+
+    let unset = true;
+
+    const setStartPoint = (e) => {
+        // resizeCanvas()
+        isDrawing = true;
+
+        const realPosX = e.clientX - canvas.getBoundingClientRect().left
+        const realPosY = e.clientY - canvas.getBoundingClientRect().top
+        
+        ctx.beginPath();
+        ctx.stroke();
+
+        startpointX = realPosX;
+        startpointY = realPosY;
+
+        savedCanvasState = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    };
+
+    const draw = (e) => {
+        if (!isDrawing) return
+        ctx.putImageData(savedCanvasState, 0, 0);
+        ctx.beginPath();
+        ctx.moveTo(startpointX, startpointY);
+        ctx.lineTo(e.clientX - canvas.getBoundingClientRect().left, e.clientY - canvas.getBoundingClientRect().top);
+        ctx.stroke(); 
+        ctx.closePath();
+    } 
+
+    canvas.addEventListener('mousedown', setStartPoint);
+
+    canvas.addEventListener('mousemove', draw)
+
+    canvas.addEventListener('mouseup', () => {
+        isDrawing = false;
+        ctx.closePath();
+    });
+
+    const resizeCanvas = () => {
+        const rect = canvas.getBoundingClientRect();
+
+        // If the element isn't laid out yet, don't resize to 0x0
+        if (rect.width === 0 || rect.height === 0) return;
+
+        const dpr = window.devicePixelRatio || 1;
+
+        canvas.width = Math.round(rect.width * dpr);
+        canvas.height = Math.round(rect.height * dpr);
+
+        // Draw using CSS pixels but with a higher-res backing store
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        // Re-apply drawing settings because resizing resets the context state
+        ctx.lineWidth = lineWidth;
+        ctx.lineCap = 'round';
+
+        savedCanvasState = null;
+    }
+
+    // resizeCanvas();
+    // window.addEventListener('resize', resizeCanvas);
+
+    requestAnimationFrame(resizeCanvas);
+    window.addEventListener('resize', () => requestAnimationFrame(resizeCanvas));
+
+    canvas.style.display = 'block'
+    canvas.style.height = '100%'
+    canvas.style.width = '100%'
+
+
+    const removeBut = document.createElement('div');
+    removeBut.classList.add('small-btn', 'mobile-hideButton')
+    removeBut.style.width = 'min-content';
+    removeBut.style.height = 'min-content';
+    removeBut.style.margin = 'auto';
+    removeBut.appendChild(document.createTextNode(lang === 'DE' ? 'Löschen' : 'CLEAR'))
+
+    removeBut.addEventListener('click', () => {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    });
+
+    riddleBody.appendChild(removeBut)
+
+    const canvasWrapper = document.createElement('div')
+    canvasWrapper.classList.add("wreath-image")
+    canvasWrapper.style.backgroundImage = "url('./images/elvesRiddle/image.png')"
+    canvasWrapper.style.backgroundSize = "cover";
+    canvasWrapper.style.aspectRatio = '948 / 485'
+    canvasWrapper.appendChild(canvas)
+
+    riddleBody.appendChild(canvasWrapper)
+
+    return riddleBody
 };
 
 const matchRiddle = (lang) => {
@@ -1428,8 +1568,8 @@ const riddleLib = [
         riddle: musicRiddle,
     },
     {
-        title: "___ Riddle",
-        riddle: ""
+        title: "Elves Riddle",
+        riddle: elvesRiddle,
     },
     {
         title: "___ Riddle",
@@ -1442,16 +1582,7 @@ const riddleLib = [
     {
         title: "___ Riddle",
         riddle: ""
-    }
-    
-    
-    
-    
-
-    // {
-    //     title: "#29 Elves Riddle",
-    //     riddle: elvesRiddle,
-    // },
+    },
 
 
 ];
