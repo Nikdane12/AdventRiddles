@@ -1810,6 +1810,43 @@ const CBNRiddle = (lang) => {
     return riddleBody
 }
 
+const mobiusRiddle = (lang) => {
+    const riddleBody = document.createElement('div')
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `Today's craft lesson includes some maths tutoring. It's about a special object, the Möbius strip. You can make a Möbius strip by closing a strip of paper into a ring and twisting it once. The elves are surprised to discover that this strip is something very special: it seems to have only one side and only one edge. What happens if you cut the Möbius strip exactly in the middle (between the blue and the red)? And how does the result change if you rotate the strip twice before closing it? Can you predict what will happen in each case?`
+        );
+    } else {
+        text = document.createTextNode(
+            `Heute gibt es in der Bastelstunde etwas Mathematik-Nachhilfe. Es geht um ein besonderes Objekt das Möbiusband. Ein Möbiusband kann man basteln, indem man einen Papierstreifen zu einem Rin schließt und ihn dabei einmal verdreht. Die Wichtel stellen dabei überrascht fest, dass dieses Ban etwas ganz Besonderes ist: Es scheint nur eine einzige Seite und nur eine einzige Kante zu haben. Wa passiert, wenn man das Möbiusband genau in der Mitte entlangschneidet (zwischen rot und blau) Und wie verändert sich das Ergebnis, wenn man den Streifen zweimal rotiert, bevor man ihn schließt Kannst du vorhersagen, was jeweils entsteht?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori');
+
+    riddleBody.appendChild(textElement)
+
+    const image1 = document.createElement('img');
+    image1.src = `./images/mobiusRiddle/0.jpg`;
+    image1.style.width = '50%';
+    const image2 = document.createElement('img');
+    image2.src = `./images/mobiusRiddle/1.jpg`;
+    image2.style.width = '50%';
+
+    const imageCont = document.createElement('div');
+    imageCont.classList.add('wreath-image', 'egypt-riddle');
+
+    imageCont.appendChild(image1)
+    imageCont.appendChild(image2)
+
+    riddleBody.appendChild(imageCont)
+
+    return riddleBody
+}
+
 const riddleLib = [
     {
         title: "Wreath Riddle",
@@ -1900,8 +1937,8 @@ const riddleLib = [
         riddle: CBNRiddle,
     },
     {
-        title: "___ Riddle",
-        riddle: ""
+        title: "Möbius Riddle",
+        riddle: mobiusRiddle,
     },
     {
         title: "___ Riddle",
