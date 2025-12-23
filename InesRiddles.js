@@ -1847,6 +1847,60 @@ const mobiusRiddle = (lang) => {
     return riddleBody
 }
 
+const finalRiddle = (lang) => {
+    const riddleBody = document.createElement('div')
+    riddleBody.style.overflow = 'scrolls'
+
+    let text;
+    if (lang == "EN") {
+        text = document.createTextNode(
+            `
+The 24th is here,
+hooray, hooray!
+
+We wish you a truly wonderful and merry christmas! But before we let you drift off into heavenly peace, you get to use your thinking cap one last time to find all the differences in the christmas chaos.
+
+The final results Will be uploaded on Boxing Day.
+
+God jul. Frohe Weihnachten. Joyeux Noël. Vrolijk kerstfeest.
+Merry Christmas. Hyvää joulua.
+
+Your secret santas Ines, Nikolai, Tim
+
+Can you find all of the diffrences from the picture sent to you?`
+        );
+    } else {
+        text = document.createTextNode(
+`Der 24. ist da,
+hurra, hurra!
+
+Wir wünschen Dir eine ganz tolle und frohe Weihnacht! Bevor wir Dich aber in die himmlische Ruh’ entlassen, darfst Du noch ein letztes Mal Deine Denkmaschine benutzen, um im Weihnachtschaos alle Unterschiede festzustellen.
+
+Die finalen Ergebnisse werden am zweiten Weihnachtstag hochgeladen.
+
+God jul. Frohe Weihnachten. Joyeux Noël. Vrolijk kerstfeest.
+Merry Christmas. Hyvää joulua.
+
+Eure Wichtel Ines, Nikolai, Tim
+
+Können Sie alle Unterschiede zu dem Ihnen zugesandten Bild finden?`
+        );
+    }
+    const textElement = document.createElement('p');
+    textElement.appendChild(text);
+    textElement.classList.add('riddleText', 'hori', 'christmasText');
+
+    riddleBody.appendChild(textElement)
+
+    const image = document.createElement('img');
+    image.src = `./images/finalRiddle/image.png`;
+    image.classList.add('wreath-image', 'egypt-riddle');
+
+    riddleBody.appendChild(image)
+
+    return riddleBody
+}
+
 const riddleLib = [
     {
         title: "Wreath Riddle",
@@ -1941,8 +1995,8 @@ const riddleLib = [
         riddle: mobiusRiddle,
     },
     {
-        title: "___ Riddle",
-        riddle: ""
+        title: "Final Riddle",
+        riddle: finalRiddle,
     },
 
 

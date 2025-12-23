@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'Casua';
+    src:url('./Casua_b.ttf');
+}
+
+
 /* === Generic layout for riddles that split text + image === */
 
 .riddleContainer {
@@ -478,4 +484,15 @@ td:nth-child(2n){
     .svgCont{
         width: 75%;
     }
+}
+
+.christmasText{
+    font-family: Casua;
+    line-height: 1;
+    margin: 0;
+    padding: 0;
+
+    overflow: hidden;
+    max-width: 500px;
+    margin: auto;
 }
