@@ -8,16 +8,16 @@ let currentdate = new Date()
 let currentlang
 
 const startup = () => {
-    // lockbutton = document.getElementById('unlock')
+    lockbutton = document.getElementById('unlock')
     unlockstatus = 'lock'
     unlockstatus = localStorage.getItem('kalanderlockstatus') ?? 'lock'
     localStorage.setItem('kalanderlockstatus', unlockstatus)
-    // if (unlockstatus == 'unlock') {
-    //     lockbutton.innerHTML = `🔓`
-    // }
-    // else {
-    //     lockbutton.innerHTML = `🔒`
-    // }
+    if (unlockstatus == 'unlock') {
+        lockbutton.innerHTML = `🔓`
+    }
+    else {
+        lockbutton.innerHTML = `🔒`
+    }
     daysarray = JSON.parse(localStorage.getItem('daysarray')) ?? []
 
     if (daysarray.length < 1) { createDays() }
@@ -109,16 +109,16 @@ const eatTreat = (day) => {
     saveLocalStorage()
 }
 
-// const unlock = () => {
-//     unlockstatus = unlockstatus == 'unlock' ? 'lock' : 'unlock'
-//     if (unlockstatus == 'unlock') {
-//         lockbutton.innerHTML = `🔓`
-//     }
-//     else {
-//         lockbutton.innerHTML = `🔒`
-//     }
-//     saveLocalStorage()
-// }
+const unlock = () => {
+    unlockstatus = unlockstatus == 'unlock' ? 'lock' : 'unlock'
+    if (unlockstatus == 'unlock') {
+        lockbutton.innerHTML = `🔓`
+    }
+    else {
+        lockbutton.innerHTML = `🔒`
+    }
+    saveLocalStorage()
+}
 
 const openDoor = (day) => {
     if (unlockstatus == 'lock') {
