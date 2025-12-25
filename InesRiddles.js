@@ -1998,8 +1998,6 @@ const riddleLib = [
         title: "Final Riddle",
         riddle: finalRiddle,
     },
-
-
 ];
 
 const openRiddle = (num, lang) => {    
